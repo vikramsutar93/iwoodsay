@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curved Image Cards Slider</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .slider-container {
+            position: relative;
+            width: 100%;
+            max-width: 1200px;
+            height: 500px;
+            margin: 0 auto;
+            perspective: 1000px;
+        }
+        
+        .slider-track {
+            position: relative;
+            height: 100%;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform-style: preserve-3d;
+        }
+        
+        .card {
+            position: absolute;
+            width: 300px;
+            height: 400px;
+            background-color: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.5s ease;
+            cursor: pointer;
+            transform-origin: center center;
+        }
+        
+        .card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .card-title {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            color: white;
+            padding: 20px;
+            font-size: 18px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+        }
+        
+        .card.active {
+            z-index: 10;
+            transform: scale(1) translateY(0) translateZ(50px);
+            opacity: 1;
+        }
+        
+        .card.prev-1 {
+            transform: scale(0.8) translateX(-70%) translateY(5%) rotateY(10deg) translateZ(-50px);
+            opacity: 0.6;
+            z-index: 5;
+        }
+        
+        .card.prev-2 {
+            transform: scale(0.6) translateX(-130%) translateY(10%) rotateY(20deg) translateZ(-100px);
+            opacity: 0.3;
+            z-index: 3;
+        }
+        
+        .card.next-1 {
+            transform: scale(0.8) translateX(70%) translateY(5%) rotateY(-10deg) translateZ(-50px);
+            opacity: 0.3;
+            z-index: 5;
+        }
+        
+        .card.next-2 {
+            transform: scale(0.6) translateX(130%) translateY(10%) rotateY(-20deg) translateZ(-100px);
+            opacity: 0.1;
+            z-index: 3;
+        }
+        
+        .card:hover .card-title {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .card.active:hover {
+            transform: scale(1.05) translateY(-10px) translateZ(50px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .card.active:hover img {
+            transform: scale(1.1);
+        }
+        
+        .controls {
+            position: absolute;
+            bottom: 30px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            z-index: 20;
+        }
+        
+        button {
+            padding: 10px 20px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #555;
+        }
+        
+        .pagination {
+            position: absolute;
+            bottom: 80px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            z-index: 20;
+        }
+        
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #ccc;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .dot.active {
+            background-color: #333;
+            transform: scale(1.5);
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 1024px) {
+            .slider-container {
+                height: 450px;
+            }
+            
+            .card {
+                width: 250px;
+                height: 350px;
+            }
+            
+            .card.prev-1 {
+                transform: scale(0.8) translateX(-60%) translateY(5%) rotateY(10deg) translateZ(-50px);
+            }
+            
+            .card.prev-2 {
+                transform: scale(0.6) translateX(-110%) translateY(10%) rotateY(20deg) translateZ(-100px);
+            }
+            
+            .card.next-1 {
+                transform: scale(0.8) translateX(60%) translateY(5%) rotateY(-10deg) translateZ(-50px);
+            }
+            
+            .card.next-2 {
+                transform: scale(0.6) translateX(110%) translateY(10%) rotateY(-20deg) translateZ(-100px);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .slider-container {
+                height: 400px;
+            }
+            
+            .card {
+                width: 220px;
+                height: 300px;
+            }
+            
+            .card-title {
+                padding: 15px;
+                font-size: 16px;
+            }
+            
+            .card.prev-1 {
+                transform: scale(0.8) translateX(-50%) translateY(5%) rotateY(10deg) translateZ(-50px);
+            }
+            
+            .card.prev-2 {
+                opacity: 0.1;
+                transform: scale(0.5) translateX(-90%) translateY(10%) rotateY(20deg) translateZ(-100px);
+            }
+            
+            .card.next-1 {
+                transform: scale(0.8) translateX(50%) translateY(5%) rotateY(-10deg) translateZ(-50px);
+            }
+            
+            .card.next-2 {
+                opacity: 0.1;
+                transform: scale(0.5) translateX(90%) translateY(10%) rotateY(-20deg) translateZ(-100px);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .slider-container {
+                height: 350px;
+            }
+            
+            .card {
+                width: 180px;
+                height: 250px;
+            }
+            
+            .card-title {
+                padding: 10px;
+                font-size: 14px;
+            }
+            
+            .pagination {
+                bottom: 70px;
+            }
+            
+            .card.prev-1 {
+                transform: scale(0.7) translateX(-50%) translateY(5%) rotateY(5deg) translateZ(-30px);
+                opacity: 0.4;
+            }
+            
+            .card.prev-2 {
+                display: none;
+            }
+            
+            .card.next-1 {
+                transform: scale(0.7) translateX(50%) translateY(5%) rotateY(-5deg) translateZ(-30px);
+                opacity: 0.2;
+            }
+            
+            .card.next-2 {
+                display: none;
+            }
+            
+            .controls {
+                bottom: 20px;
+            }
+            
+            button {
+                padding: 8px 15px;
+                font-size: 14px;
+            }
+        }
+        
+        /* Touch-friendly adjustments */
+        @media (hover: none) {
+            .card.active:hover {
+                transform: scale(1) translateY(0) translateZ(50px);
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            }
+            
+            .card.active:hover img {
+                transform: scale(1);
+            }
+            
+            .card.active .card-title {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="slider-container">
+        <div class="slider-track" id="slider-track">
+            <!-- Cards will be generated dynamically -->
+        </div>
+        
+        <div class="pagination" id="pagination">
+            <!-- Dots will be generated dynamically -->
+        </div>
+        
+        <div class="controls">
+            <button id="prev-btn">Previous</button>
+            <button id="next-btn">Next</button>
+        </div>
+    </div>
+    
+    <script>
+        // Image data - exactly 5 images
+        const images = [
+            { src: '/api/placeholder/600/800', title: 'Beautiful Mountains' },
+            { src: '/api/placeholder/600/800', title: 'Sunset at the Beach' },
+            { src: '/api/placeholder/600/800', title: 'Forest Adventure' },
+            { src: '/api/placeholder/600/800', title: 'City Lights' },
+            { src: '/api/placeholder/600/800', title: 'Desert Journey' }
+        ];
+        
+        let currentIndex = 0;
+        const sliderTrack = document.getElementById('slider-track');
+        const pagination = document.getElementById('pagination');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        
+        // Create cards
+        function createCards() {
+            sliderTrack.innerHTML = '';
+            pagination.innerHTML = '';
+            
+            // Create all 5 cards at once
+            images.forEach((image, index) => {
+                // Create card
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.setAttribute('aria-label', image.title);
+                card.setAttribute('role', 'button');
+                card.setAttribute('tabindex', '0');
+                
+                // Create image
+                const img = document.createElement('img');
+                img.src = image.src;
+                img.alt = image.title;
+                img.loading = 'lazy';
+                
+                // Create title
+                const title = document.createElement('div');
+                title.className = 'card-title';
+                title.textContent = image.title;
+                
+                // Append elements
+                card.appendChild(img);
+                card.appendChild(title);
+                sliderTrack.appendChild(card);
+                
+                // Click event
+                card.addEventListener('click', () => {
+                    if (index !== currentIndex) {
+                        currentIndex = index;
+                        updateCards();
+                    }
+                });
+                
+                // Keyboard navigation for accessibility
+                card.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        if (index !== currentIndex) {
+                            currentIndex = index;
+                            updateCards();
+                        }
+                    }
+                });
+                
+                // Create pagination dot
+                const dot = document.createElement('div');
+                dot.className = 'dot';
+                dot.setAttribute('aria-label', `Go to slide ${index + 1}`);
+                dot.setAttribute('role', 'button');
+                dot.setAttribute('tabindex', '0');
+                
+                if (index === currentIndex) {
+                    dot.classList.add('active');
+                    dot.setAttribute('aria-current', 'true');
+                }
+                
+                dot.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateCards();
+                });
+                
+                dot.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        currentIndex = index;
+                        updateCards();
+                    }
+                });
+                
+                pagination.appendChild(dot);
+            });
+            
+            updateCards();
+        }
+        
+        // Update card positions
+        function updateCards() {
+            const cards = document.querySelectorAll('.card');
+            const dots = document.querySelectorAll('.dot');
+            
+            cards.forEach((card, index) => {
+                // Reset all classes and attributes
+                card.className = 'card';
+                card.removeAttribute('aria-current');
+                
+                // Calculate the relative position (-2, -1, 0, 1, 2)
+                let relativePos = index - currentIndex;
+                
+                // Handle wrapping for a circular effect
+                if (relativePos < -2) relativePos += 5;
+                if (relativePos > 2) relativePos -= 5;
+                
+                // Apply appropriate class based on position
+                if (relativePos === 0) {
+                    card.classList.add('active');
+                    card.setAttribute('aria-current', 'true');
+                } else if (relativePos === -1) {
+                    card.classList.add('prev-1');
+                } else if (relativePos === -2) {
+                    card.classList.add('prev-2');
+                } else if (relativePos === 1) {
+                    card.classList.add('next-1');
+                } else if (relativePos === 2) {
+                    card.classList.add('next-2');
+                }
+            });
+            
+            // Update active dot
+            dots.forEach((dot, index) => {
+                dot.className = 'dot';
+                dot.removeAttribute('aria-current');
+                
+                if (index === currentIndex) {
+                    dot.classList.add('active');
+                    dot.setAttribute('aria-current', 'true');
+                }
+            });
+            
+            // Announce slide change for screen readers
+            announceSlideChange(currentIndex + 1, images.length);
+        }
+        
+        // Accessibility: Announce slide change to screen readers
+        function announceSlideChange(current, total) {
+            const liveRegion = document.getElementById('slider-live-region') || createLiveRegion();
+            liveRegion.textContent = `Slide ${current} of ${total}, ${images[currentIndex].title}`;
+        }
+        
+        // Create live region for accessibility announcements
+        function createLiveRegion() {
+            const liveRegion = document.createElement('div');
+            liveRegion.id = 'slider-live-region';
+            liveRegion.className = 'sr-only';
+            liveRegion.setAttribute('aria-live', 'polite');
+            liveRegion.setAttribute('aria-atomic', 'true');
+            document.body.appendChild(liveRegion);
+            
+            // Add screen reader only style
+            const style = document.createElement('style');
+            style.textContent = `
+                .sr-only {
+                    position: absolute;
+                    width: 1px;
+                    height: 1px;
+                    padding: 0;
+                    margin: -1px;
+                    overflow: hidden;
+                    clip: rect(0, 0, 0, 0);
+                    white-space: nowrap;
+                    border-width: 0;
+                }
+            `;
+            document.head.appendChild(style);
+            
+            return liveRegion;
+        }
+        
+        // Initialize
+        createCards();
+        
+        // Event listeners for buttons
+        prevBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            updateCards();
+        });
+        
+        nextBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % images.length;
+            updateCards();
+        });
+        
+        // Add swipe functionality for mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+        
+        sliderTrack.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+            // Stop auto-sliding on touch interaction
+            stopAutoSlide();
+        }, { passive: true });
+        
+        sliderTrack.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+            // Restart auto-sliding after touch interaction
+            startAutoSlide();
+        }, { passive: true });
+        
+        function handleSwipe() {
+            if (touchEndX < touchStartX - 50) {
+                // Swipe left
+                currentIndex = (currentIndex + 1) % images.length;
+                updateCards();
+            } else if (touchEndX > touchStartX + 50) {
+                // Swipe right
+                currentIndex = (currentIndex - 1 + images.length) % images.length;
+                updateCards();
+            }
+        }
+        
+        // Auto slide
+        let autoSlideInterval;
+        
+        function startAutoSlide() {
+            autoSlideInterval = setInterval(() => {
+                currentIndex = (currentIndex + 1) % images.length;
+                updateCards();
+            }, 3000);
+        }
+        
+        function stopAutoSlide() {
+            clearInterval(autoSlideInterval);
+        }
+        
+        // Pause auto-slide on hover
+        sliderTrack.addEventListener('mouseenter', stopAutoSlide);
+        sliderTrack.addEventListener('mouseleave', startAutoSlide);
+        
+        // Start auto-sliding
+        startAutoSlide();
+        
+        // Add keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') {
+                currentIndex = (currentIndex - 1 + images.length) % images.length;
+                updateCards();
+            } else if (e.key === 'ArrowRight') {
+                currentIndex = (currentIndex + 1) % images.length;
+                updateCards();
+            }
+        });
+        
+        // Responsive handling - resize event
+        window.addEventListener('resize', () => {
+            // Update card positioning on window resize
+            updateCards();
+        });
+        
+        // Pause auto-sliding when page is not visible
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                stopAutoSlide();
+            } else {
+                startAutoSlide();
+            }
+        });
+    </script>
+</body>
+</html>
