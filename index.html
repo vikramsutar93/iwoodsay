@@ -3,14 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>I Wood Say</title>
-    <link rel="icon" type="image/x-icon" href="/infintyLogo.png">
+    <title>Responsive Navbar</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Arial', sans-serif;
+            ::-webkit-scrollbar {
+                display: none;
+            }
         }
 
         body {
@@ -56,22 +58,30 @@
         }
 
         .nav-links a:hover {
-            color: black;
+            color: #2c6a73;
         }
 
         .cta-button {
-            background-color: rgb(64, 64, 64);
-            color: white;
-            padding: 1rem 1.5rem;
+            padding: 10px 25px;
+            font-size: 18px;
+            color: #fff;
+            background: linear-gradient(145deg, #3b8d99, #000000);
             border: none;
             border-radius: 30px;
-            font-weight: bold;
             cursor: pointer;
-            transition: background-color 0.3s;
+            /* 3D-like effect using box-shadow */
+            box-shadow: 0 6px 0 #2c6a73, 0 10px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.1s, box-shadow 0.1s;
         }
 
-        .cta-button:hover {
-            background-color: black;
+        .cta-button:active {
+            transform: translateY(6px);
+            box-shadow: 0 0 0 #2c6a73, 0 3px 6px rgb(0, 0, 0);
+        }
+
+        .cta-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
         }
 
         .burger {
@@ -85,10 +95,6 @@
             background-color: #333;
             margin: 5px;
             transition: all 0.3s ease;
-        }
-
-        #consvg{
-            display: none;
         }
 
         @media screen and (max-width: 768px) {
@@ -111,6 +117,7 @@
                 transition: all 0.5s ease;
                 overflow: hidden;
                 box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                font-size: 2rem;
             }
 
             .nav-links.active {
@@ -132,8 +139,11 @@
             }
 
             .cta-button {
-                margin-top: 1rem;
-            }
+                font-size: 2rem;
+            margin: 1rem 0;
+            padding: 1rem 5rem;
+            border-radius: 5px;
+        }
 
             .toggle .line1 {
                 transform: rotate(-45deg) translate(-5px, 6px);
@@ -146,40 +156,45 @@
             .toggle .line3 {
                 transform: rotate(45deg) translate(-5px, -6px);
             }
-
-            #consvg{
-                display: block;
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                z-index: 0;
-            }
-            svg circle{
-                fill: black;
-                transition: .5s ease-in-out;
-            }
-
         }
+
+        /*-----NavBar Close*/
+        /*-----Hero Section*/
+        .hero{
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .contant{
+            width: 500vw;
+            height: 100vh;
+            border: #000000 solid 2px;
+        }
+
+        .slider{
+            width: 500vw;
+            height: 100vh;
+            border: red solid 2px;
+        }
+        /*-----Hero Section Close*/
 
     </style>
 </head>
 <body>
     <nav class="navbar">
         <div class="logo">
-          <img src="/Logo_.png" alt="Logo">
+          <img src="Logo_.png" alt="Logo">
         </div>
         
         <ul class="nav-links">
             <li><a href="#">Home</a></li>
             <li><a href="/Imageslider.html">Explore</a></li>
             <li><a href="#">Products</a></li>
-            <li><a href="/Clickybutton.html">Services</a></li>
+            <li><a href="#">Services</a></li>
             <li><a href="#">About</a></li>
             <li><button class="cta-button">Contact</button></li>
-            <svg id="consvg" height="90vh" width="100%">
-                <circle id="consvgcircle" r="0" cx="50%" cy="70.5vh"/>
-              </svg>
         </ul>
         
         <div class="burger">
@@ -189,10 +204,13 @@
         </div>
     </nav>
     <section class="hero">
-      <div></div>
-      <div></div>
+        <div class="contant">
+            Contant
+        </div>
+        <div class="slider">
+            Slider
+        </div>
     </section>
-
 
 
 
@@ -222,19 +240,6 @@
                 }
             });
         });
-
-        //contact hover
-        document.querySelector(".cta-button").addEventListener("mouseover", mouseOver);
-        document.querySelector(".cta-button").addEventListener("mouseout", mouseOut);
-
-        function mouseOver() {
-        document.querySelector("#consvgcircle").style.r=700;
-        }
-
-        function mouseOut() {
-        document.querySelector("#consvgcircle").style.r=0;
-        }
-
     </script>
 </body>
 </html>
