@@ -698,25 +698,6 @@
         .mobile-card-container {
         display: block;
       }
-      
-      /* Add rainbow gradient border to mobile card */
-      .mobile-card-container {
-        position: relative;
-      }
-      .mobile-card-container::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 4px;
-        background: linear-gradient(to right, 
-          #4361ee 0%, 
-          #f72585 33%, 
-          #4cc9f0 66%, 
-          #4d908e 100%);
-        border-radius: 16px 16px 0 0;
-      }
     }
 
         @media (max-width: 576px) {
@@ -822,26 +803,7 @@
                         <i class="fas fa-user-astronaut"></i>
                     </div>
                 </div>
-                <div class="rating-text">
-                    <div class="stars">
-                        <span class="star"><i class="fas fa-star"></i></span>
-                        <span class="star"><i class="fas fa-star"></i></span>
-                        <span class="star"><i class="fas fa-star"></i></span>
-                        <span class="star"><i class="fas fa-star"></i></span>
-                        <span class="star"><i class="fas fa-star-half-alt"></i></span>
-                        <span style="color: #333; font-size: 14px; margin-left: 5px;">4.5</span>
-                    </div>
-                    <span class="reviews">Based on 1,248 reviews</span>
-                </div>
-            </div>
-            
-            <button class="cta-button">Get Started</button>
-            
-            <div class="scroll-down"></div>
-        </div>
-    </div>
-
-    <div class="container">
+                <div class="container">
     <div class="card">
       <div class="card-icon">👥</div>
       <div class="card-title">Happy Customers</div>
@@ -900,6 +862,15 @@
       </div>
     </div>
   </div>
+            </div>
+            
+            <button class="cta-button">Get Started</button>
+            
+            <div class="scroll-down"></div>
+        </div>
+    </div>
+
+    
 
     <script>
     // Counter animation function
