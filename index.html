@@ -390,6 +390,208 @@
             }
         }
 
+        /*our performance*/
+
+        .card {
+      position: relative;
+      width: 250px;
+      height: 220px;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(40px);
+      animation: fadeIn 0.8s ease forwards;
+    }
+    
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .card:nth-child(1) { animation-delay: 0.2s; }
+    .card:nth-child(2) { animation-delay: 0.4s; }
+    .card:nth-child(3) { animation-delay: 0.6s; }
+    .card:nth-child(4) { animation-delay: 0.8s; }
+    
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    }
+    
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(90deg, var(--card-color) 0%, var(--card-color-light) 100%);
+    }
+    
+    .card-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: var(--card-color-light);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 15px;
+      color: var(--card-color);
+      font-size: 24px;
+      transition: transform 0.3s ease;
+    }
+    
+    .card:hover .card-icon {
+      transform: scale(1.1) rotate(10deg);
+    }
+    
+    .card-title {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: #333;
+    }
+    
+    .card-value {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--card-color);
+      margin-bottom: 5px;
+    }
+    
+    .card-desc {
+      font-size: 14px;
+      color: #666;
+      line-height: 1.4;
+    }
+    
+    /* Card specific colors */
+    .card:nth-child(1) {
+      --card-color: #4361ee;
+      --card-color-light: rgba(67, 97, 238, 0.2);
+    }
+    
+    .card:nth-child(2) {
+      --card-color: #f72585;
+      --card-color-light: rgba(247, 37, 133, 0.2);
+    }
+    
+    .card:nth-child(3) {
+      --card-color: #4cc9f0;
+      --card-color-light: rgba(76, 201, 240, 0.2);
+    }
+    
+    .card:nth-child(4) {
+      --card-color: #4d908e;
+      --card-color-light: rgba(77, 144, 142, 0.2);
+    }
+    
+    /* Mobile Card Container */
+    .mobile-card-container {
+      display: none;
+      width: 100%;
+      max-width: 360px;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      padding: 20px 15px;
+      margin: 0 auto;
+      opacity: 0;
+      transform: translateY(40px);
+      animation: fadeIn 0.8s ease forwards;
+    }
+    
+    .mobile-card-title {
+      text-align: center;
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 15px;
+      color: #333;
+    }
+    
+    .mobile-stats-container {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: nowrap;
+    }
+    
+    .mobile-stat {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 23%;
+    }
+    
+    .mobile-stat-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 8px;
+      font-size: 16px;
+    }
+    
+    .mobile-stat-value {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 3px;
+    }
+    
+    .mobile-stat-title {
+      font-size: 10px;
+      text-align: center;
+      color: #666;
+    }
+    
+    /* Define colors for mobile stats */
+    .mobile-stat:nth-child(1) .mobile-stat-icon {
+      background: rgba(67, 97, 238, 0.2);
+      color: #4361ee;
+    }
+    .mobile-stat:nth-child(1) .mobile-stat-value {
+      color: #4361ee;
+    }
+    
+    .mobile-stat:nth-child(2) .mobile-stat-icon {
+      background: rgba(247, 37, 133, 0.2);
+      color: #f72585;
+    }
+    .mobile-stat:nth-child(2) .mobile-stat-value {
+      color: #f72585;
+    }
+    
+    .mobile-stat:nth-child(3) .mobile-stat-icon {
+      background: rgba(76, 201, 240, 0.2);
+      color: #4cc9f0;
+    }
+    .mobile-stat:nth-child(3) .mobile-stat-value {
+      color: #4cc9f0;
+    }
+    
+    .mobile-stat:nth-child(4) .mobile-stat-icon {
+      background: rgba(77, 144, 142, 0.2);
+      color: #4d908e;
+    }
+    .mobile-stat:nth-child(4) .mobile-stat-value {
+      color: #4d908e;
+    }
+        
+
         @media (max-width: 992px) {
             h1 {
                 font-size: 3rem;
@@ -404,6 +606,15 @@
                 height: 35px;
             }
         }
+
+        /*our performance*/
+        .mobile-card-container {
+        display: none;
+      }
+      .container {
+        display: flex;
+      }
+    }
 
 
         @media screen and (max-width: 768px) {
@@ -485,6 +696,26 @@
             }
         }
 
+        /* Add rainbow gradient border to mobile card */
+      .mobile-card-container {
+        position: relative;
+      }
+      .mobile-card-container::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(to right, 
+          #4361ee 0%, 
+          #f72585 33%, 
+          #4cc9f0 66%, 
+          #4d908e 100%);
+        border-radius: 16px 16px 0 0;
+      }
+    }
+
         @media (max-width: 576px) {
             h1 {
                 font-size: 1.8rem;
@@ -513,6 +744,16 @@
                 margin: 0 4px;
             }
         }
+
+        /*Our purformance*/
+        .container {
+        display: none;
+      }
+      .mobile-card-container {
+        display: block;
+      }
+      
+      
         
     </style>
 </head>
@@ -604,6 +845,241 @@
             <div class="scroll-down"></div>
         </div>
     </div>
+
+    <div class="container">
+    <div class="card">
+      <div class="card-icon">👥</div>
+      <div class="card-title">Happy Customers</div>
+      <div class="card-value" id="desktop-customer-count">0</div>
+      <div class="card-desc">Satisfied clients worldwide</div>
+    </div>
+    
+    <div class="card">
+      <div class="card-icon">📦</div>
+      <div class="card-title">Products</div>
+      <div class="card-value" id="desktop-product-count">0</div>
+      <div class="card-desc">Unique quality products</div>
+    </div>
+    
+    <div class="card">
+      <div class="card-icon">🎯</div>
+      <div class="card-title">Accuracy</div>
+      <div class="card-value" id="desktop-accuracy-value">0%</div>
+      <div class="card-desc">Perfect delivery rate</div>
+    </div>
+    
+    <div class="card">
+      <div class="card-icon">🌎</div>
+      <div class="card-title">Worldwide</div>
+      <div class="card-value" id="desktop-countries-count">0</div>
+      <div class="card-desc">Countries we deliver to</div>
+    </div>
+  </div>
+  
+  <!-- Mobile view - single card with all stats -->
+  <div class="mobile-card-container">
+    <div class="mobile-card-title">Our Performance</div>
+    <div class="mobile-stats-container">
+      <div class="mobile-stat">
+        <div class="mobile-stat-icon">👥</div>
+        <div class="mobile-stat-value" id="mobile-customer-count">0</div>
+        <div class="mobile-stat-title">Customers</div>
+      </div>
+      
+      <div class="mobile-stat">
+        <div class="mobile-stat-icon">📦</div>
+        <div class="mobile-stat-value" id="mobile-product-count">0</div>
+        <div class="mobile-stat-title">Products</div>
+      </div>
+      
+      <div class="mobile-stat">
+        <div class="mobile-stat-icon">🎯</div>
+        <div class="mobile-stat-value" id="mobile-accuracy-value">0%</div>
+        <div class="mobile-stat-title">Accuracy</div>
+      </div>
+      
+      <div class="mobile-stat">
+        <div class="mobile-stat-icon">🌎</div>
+        <div class="mobile-stat-value" id="mobile-countries-count">0</div>
+        <div class="mobile-stat-title">Countries</div>
+      </div>
+    </div>
+  </div>
+
+    <script>
+    // Counter animation function
+    function animateValue(id, start, end, duration, isPercentage = false) {
+      const obj = document.getElementById(id);
+      if (!obj) return; // Skip if element not found
+      
+      let startTimestamp = null;
+      const step = (timestamp) => {
+        if (!startTimestamp) startTimestamp = timestamp;
+        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+        const value = Math.floor(progress * (end - start) + start);
+        obj.innerHTML = isPercentage ? `${value}%` : value.toLocaleString();
+        if (progress < 1) {
+          window.requestAnimationFrame(step);
+        }
+      };
+      window.requestAnimationFrame(step);
+    }
+    
+    // Start animations when document is loaded
+    document.addEventListener('DOMContentLoaded', () => {
+      // Animate desktop counters with delays
+      setTimeout(() => animateValue('desktop-customer-count', 0, 75, 2000), 1000);
+      setTimeout(() => animateValue('desktop-product-count', 0, 60, 2000), 1300);
+      setTimeout(() => animateValue('desktop-accuracy-value', 0, 99, 2000, true), 1600);
+      setTimeout(() => animateValue('desktop-countries-count', 0, 15, 2000), 1900);
+      
+      // Animate mobile counters with delays
+      setTimeout(() => animateValue('mobile-customer-count', 0, 75, 2000), 1000);
+      setTimeout(() => animateValue('mobile-product-count', 0, 60, 2000), 1300);
+      setTimeout(() => animateValue('mobile-accuracy-value', 0, 99, 2000, true), 1600);
+      setTimeout(() => animateValue('mobile-countries-count', 0, 15, 2000), 1900);
+      
+      // Add hover/click effects to desktop cards
+      const cards = document.querySelectorAll('.card');
+      cards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+          // Create and animate particles for desktop
+          for (let i = 0; i < 8; i++) {
+            createParticle(card);
+          }
+        });
+        
+        card.addEventListener('click', () => {
+          card.style.transform = 'scale(0.95)';
+          setTimeout(() => {
+            card.style.transform = '';
+          }, 200);
+        });
+      });
+      
+      // Add effects to mobile card
+      const mobileCard = document.querySelector('.mobile-card-container');
+      mobileCard.addEventListener('click', () => {
+        mobileCard.style.transform = 'scale(0.98)';
+        setTimeout(() => {
+          mobileCard.style.transform = '';
+        }, 200);
+        
+        // Create particles on mobile card tap
+        const mobileStats = document.querySelectorAll('.mobile-stat');
+        mobileStats.forEach(stat => {
+          createMobileParticle(stat);
+        });
+      });
+      
+      // Add specific animation to mobile stat icons on tap
+      document.querySelectorAll('.mobile-stat').forEach(stat => {
+        stat.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const icon = stat.querySelector('.mobile-stat-icon');
+          icon.style.transform = 'scale(1.2) rotate(10deg)';
+          setTimeout(() => {
+            icon.style.transform = '';
+          }, 300);
+          
+          // Create particles just for this stat
+          for (let i = 0; i < 3; i++) {
+            createMobileParticle(stat);
+          }
+        });
+      });
+    });
+    
+    // Function to create particles for desktop cards
+    function createParticle(parent) {
+      const particle = document.createElement('div');
+      particle.style.position = 'absolute';
+      particle.style.width = `${Math.random() * 10 + 5}px`;
+      particle.style.height = particle.style.width;
+      particle.style.background = getComputedStyle(parent).getPropertyValue('--card-color');
+      particle.style.borderRadius = '50%';
+      particle.style.opacity = '0.6';
+      particle.style.pointerEvents = 'none';
+      
+      // Set random starting position
+      const startX = 50 + (Math.random() * 150);
+      const startY = 70 + (Math.random() * 80);
+      particle.style.left = `${startX}px`;
+      particle.style.top = `${startY}px`;
+      
+      // Add particle to parent
+      parent.appendChild(particle);
+      
+      // Animate particle
+      const animation = particle.animate([
+        { 
+          transform: 'translate(0, 0)', 
+          opacity: 0.6 
+        },
+        { 
+          transform: `translate(${(Math.random() - 0.5) * 100}px, ${-Math.random() * 100 - 20}px)`, 
+          opacity: 0 
+        }
+      ], {
+        duration: 1000 + Math.random() * 1000,
+        easing: 'cubic-bezier(0.1, 0.7, 1.0, 0.1)'
+      });
+      
+      // Remove particle after animation
+      animation.onfinish = () => {
+        particle.remove();
+      };
+    }
+    
+    // Function to create particles for mobile stats
+    function createMobileParticle(parent) {
+      const particle = document.createElement('div');
+      particle.style.position = 'absolute';
+      particle.style.width = `${Math.random() * 5 + 3}px`;
+      particle.style.height = particle.style.width;
+      
+      // Get color from value element
+      const valueEl = parent.querySelector('.mobile-stat-value');
+      particle.style.background = getComputedStyle(valueEl).color;
+      
+      particle.style.borderRadius = '50%';
+      particle.style.opacity = '0.6';
+      particle.style.pointerEvents = 'none';
+      
+      // Set random starting position based on icon
+      const icon = parent.querySelector('.mobile-stat-icon');
+      const rect = icon.getBoundingClientRect();
+      const parentRect = parent.getBoundingClientRect();
+      
+      const startX = rect.width/2;
+      const startY = rect.height/2;
+      particle.style.left = `${startX}px`;
+      particle.style.top = `${startY}px`;
+      
+      // Add particle to icon element
+      icon.appendChild(particle);
+      
+      // Animate particle
+      const animation = particle.animate([
+        { 
+          transform: 'translate(0, 0)', 
+          opacity: 0.6 
+        },
+        { 
+          transform: `translate(${(Math.random() - 0.5) * 30}px, ${-Math.random() * 30 - 10}px)`, 
+          opacity: 0 
+        }
+      ], {
+        duration: 600 + Math.random() * 400,
+        easing: 'cubic-bezier(0.1, 0.7, 1.0, 0.1)'
+      });
+      
+      // Remove particle after animation
+      animation.onfinish = () => {
+        particle.remove();
+      };
+    }
+  </script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
