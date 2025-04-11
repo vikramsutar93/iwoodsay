@@ -687,6 +687,32 @@
             }
         }
 
+        /*our performance*/
+
+        .mobile-card-container {
+        display: block;
+      }
+      
+      /* Add rainbow gradient border to mobile card */
+      .mobile-card-container {
+        position: relative;
+      }
+      .mobile-card-container::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(to right, 
+          #4361ee 0%, 
+          #f72585 33%, 
+          #4cc9f0 66%, 
+          #4d908e 100%);
+        border-radius: 16px 16px 0 0;
+      }
+    }
+
         @media (max-width: 576px) {
             h1 {
                 font-size: 1.8rem;
