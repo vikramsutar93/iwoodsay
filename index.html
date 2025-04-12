@@ -630,6 +630,34 @@
             { src: '/Post5.png', title: 'Desert Journey' }
         ];
 
+        //touch slider
+        
+        let startX = 0;
+    let endX = 0;
+
+    sliderTrack.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX;
+    });
+
+    sliderTrack.addEventListener('touchmove', (e) => {
+        endX = e.touches[0].clientX;
+    });
+
+    sliderTrack.addEventListener('touchend', () => {
+        const deltaX = endX - startX;
+        if (Math.abs(deltaX) > 50) {
+            if (deltaX < 0) {
+                // Swiped left
+                currentIndex = (currentIndex + 1) % images.length;
+            } else {
+                // Swiped right
+                currentIndex = (currentIndex - 1 + images.length) % images.length;
+            }
+            updateCards();
+        }
+    });
+        // Touch SLider
+        
         let currentIndex = 0;
         const sliderTrack = document.getElementById('slider-track');
         const prevBtn = document.getElementById('prev-btn');
