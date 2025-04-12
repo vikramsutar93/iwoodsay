@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Responsive Navbar</title>
+    <title>IWoodSay</title>
     <style>
         * {
             margin: 0;
@@ -98,6 +98,220 @@
             transition: all 0.3s ease;
         }
 
+        /*Sliding Image open*/
+
+        .hero-container {
+            position: relative;
+            max-width: 1400px;
+            margin: 0 auto;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease, transform 1s ease;
+        }
+
+        .hero-container.loaded {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Slider styles */
+        .slider {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 6px;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+            z-index: 1;
+        }
+
+        .slide.active {
+            opacity: 1;
+            z-index: 2;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Arrow controls */
+        .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            font-size: 36px;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s ease;
+            text-shadow: 0 0 10px rgba(0,0,0,0.5);
+            opacity: 0;
+        }
+
+        .arrow.visible {
+            opacity: 1;
+            animation: fadeInFromSide 0.5s ease forwards;
+        }
+
+        .arrow-left {
+            left: 20px;
+            animation-delay: 0.5s;
+        }
+
+        .arrow-right {
+            right: 20px;
+            animation-delay: 0.6s;
+        }
+
+        .arrow:hover {
+            transform: translateY(-50%) scale(1.2);
+        }
+
+        @keyframes fadeInFromSide {
+            from {
+                opacity: 0;
+                transform: translateY(-50%) translateX(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(-50%) translateX(0);
+            }
+        }
+
+        /* Content styles */
+        .hero-content {
+            text-align: center;
+            padding: 50px 20px;
+        }
+
+        .hero-content h1 {
+            font-size: 42px;
+            margin-bottom: 20px;
+            color: #222;
+            font-weight: 700;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .hero-content h1.visible {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.8s ease, transform 0.7s ease;
+            transition-delay: 0.2s;
+        }
+
+        .hero-content p {
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            color: #555;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .hero-content p.visible {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.8s ease, transform 0.7s ease;
+            transition-delay: 0.4s;
+        }
+
+        /* Form styles */
+        .enquiry-form {
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+            flex-wrap: wrap;
+            gap: 10px;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .enquiry-form.visible {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.8s ease, transform 0.7s ease;
+            transition-delay: 0.6s;
+        }
+
+        .email-input {
+            padding: 15px 20px;
+            font-size: 16px;
+            border: 2px solid #eee;
+            border-radius: 5px;
+            min-width: 300px;
+            transition: all 0.3s ease;
+        }
+
+        .email-input:focus {
+            outline: none;
+            border-color: #0066cc;
+            box-shadow: 0 0 15px rgba(0, 102, 204, 0.1);
+        }
+
+        .enquiry-button {
+            padding: 15px 30px;
+            font-size: 16px;
+            background-color: #0066cc;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .enquiry-button:hover {
+            background-color: #0055aa;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 102, 204, 0.3);
+        }
+
+        /* Loading animation for images */
+        .loader {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.8);
+            z-index: 5;
+        }
+
+        .loader::after {
+            content: "";
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #0066cc;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /*Sliding Image Close*/
+
         @media (max-width: 992px) {
             h1 {
                 font-size: 3rem;
@@ -165,11 +379,53 @@
             h1 {
                 font-size: 2.5rem;
             }
+            .hero-content h1 {
+                font-size: 32px;
+            }
+
+            .hero-content p {
+                font-size: 16px;
+            }
+
+            .email-input, .enquiry-button {
+                width: 100%;
+                max-width: 400px;
+            }
+
+            .arrow {
+                font-size: 30px;
+            }
     }
 
         @media (max-width: 576px) {
             h1 {
                 font-size: 1.8rem;
+            }
+            .hero-content h1 {
+                font-size: 28px;
+            }
+
+            .email-input {
+                min-width: auto;
+                width: 90%;
+                max-width: 280px;
+                padding: 12px 15px;
+                font-size: 14px;
+            }
+
+            .enquiry-button {
+                padding: 12px 20px;
+                font-size: 14px;
+                width: 90%;
+                max-width: 280px;
+            }
+
+            .arrow {
+                font-size: 24px;
+            }
+
+            .slider {
+                border-radius: 4px;
             }
         }
       
@@ -198,428 +454,197 @@
             <div class="line3"></div>
         </div>
     </nav>
-
-
-    <div class="hero-container">
-        <section class="hero-slider">
-            <div class="slider">
-                <!-- Slides will be loaded dynamically with JavaScript -->
+    <section class="hero-container">
+        <!-- Image Slider -->
+        <div class="slider">
+            <div class="slide active">
+                <div class="loader"></div>
+                <!-- Images will be loaded dynamically via JavaScript -->
+            </div>
+            <div class="slide">
+                <div class="loader"></div>
+                <!-- Images will be loaded dynamically via JavaScript -->
+            </div>
+            <div class="slide">
+                <div class="loader"></div>
+                <!-- Images will be loaded dynamically via JavaScript -->
+            </div>
+            <div class="slide">
+                <div class="loader"></div>
+                <!-- Images will be loaded dynamically via JavaScript -->
             </div>
             
-            <div class="main-heading">
-                <div class="heading-container">
-                    <h1>Discover Amazing Experiences</h1>
-                </div>
-            </div>
-            
-            <div class="slider-controls">
-                <!-- Dots will be generated dynamically -->
-            </div>
-            
-            <div class="slider-arrows">
-                <div class="slider-arrow prev-arrow">
-                    <i class="fas fa-chevron-left"></i>
-                </div>
-                <div class="slider-arrow next-arrow">
-                    <i class="fas fa-chevron-right"></i>
-                </div>
-            </div>
-        </section>
-        
-        <div class="content-below">
-            <p class="subheading">Start your adventure today and create unforgettable memories</p>
-            
-            
-                <div class="container">
-    <div class="card">
-      <div class="card-icon">👥</div>
-      <div class="card-title">Happy Customers</div>
-      <div class="card-value" id="desktop-customer-count">0</div>
-      <div class="card-desc">Satisfied clients worldwide</div>
-    </div>
-    
-    <div class="card">
-      <div class="card-icon">📦</div>
-      <div class="card-title">Products</div>
-      <div class="card-value" id="desktop-product-count">0</div>
-      <div class="card-desc">Unique quality products</div>
-    </div>
-    
-    <div class="card">
-      <div class="card-icon">🎯</div>
-      <div class="card-title">Accuracy</div>
-      <div class="card-value" id="desktop-accuracy-value">0%</div>
-      <div class="card-desc">Perfect delivery rate</div>
-    </div>
-    
-    <div class="card">
-      <div class="card-icon">🌎</div>
-      <div class="card-title">Worldwide</div>
-      <div class="card-value" id="desktop-countries-count">0</div>
-      <div class="card-desc">Countries we deliver to</div>
-    </div>
-  </div>
-  
-  <!-- Mobile view - single card with all stats -->
-  <div class="mobile-card-container">
-    <div class="mobile-card-title">Our Performance</div>
-    <div class="mobile-stats-container">
-      <div class="mobile-stat">
-        <div class="mobile-stat-icon">👥</div>
-        <div class="mobile-stat-value" id="mobile-customer-count">0</div>
-        <div class="mobile-stat-title">Customers</div>
-      </div>
-      
-      <div class="mobile-stat">
-        <div class="mobile-stat-icon">📦</div>
-        <div class="mobile-stat-value" id="mobile-product-count">0</div>
-        <div class="mobile-stat-title">Products</div>
-      </div>
-      
-      <div class="mobile-stat">
-        <div class="mobile-stat-icon">🎯</div>
-        <div class="mobile-stat-value" id="mobile-accuracy-value">0%</div>
-        <div class="mobile-stat-title">Accuracy</div>
-      </div>
-      
-      <div class="mobile-stat">
-        <div class="mobile-stat-icon">🌎</div>
-        <div class="mobile-stat-value" id="mobile-countries-count">0</div>
-        <div class="mobile-stat-title">Countries</div>
-      </div>
-    </div>
-  </div>
-            
-            <button class="cta-button">Get Started</button>
-            
-            <div class="scroll-down"></div>
+            <!-- Arrow Controls (no background) -->
+            <div class="arrow arrow-left">&#10094;</div>
+            <div class="arrow arrow-right">&#10095;</div>
         </div>
-    </div>
+        
+        <!-- Hero Content -->
+        <div class="hero-content">
+            <h1>Innovating for a Better Tomorrow</h1>
+            <p>We create exceptional products and deliver outstanding services that transform businesses worldwide.</p>
+            
+            <!-- Enquiry Form -->
+            <form class="enquiry-form">
+                <input type="email" class="email-input" placeholder="Enter your email address" required>
+                <button type="submit" class="enquiry-button">Get In Touch</button>
+            </form>
+        </div>
+    </section>
 
     
-
-    <script>
-    // Counter animation function
-    function animateValue(id, start, end, duration, isPercentage = false) {
-      const obj = document.getElementById(id);
-      if (!obj) return; // Skip if element not found
-      
-      let startTimestamp = null;
-      const step = (timestamp) => {
-        if (!startTimestamp) startTimestamp = timestamp;
-        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-        const value = Math.floor(progress * (end - start) + start);
-        obj.innerHTML = isPercentage ? `${value}%` : value.toLocaleString();
-        if (progress < 1) {
-          window.requestAnimationFrame(step);
-        }
-      };
-      window.requestAnimationFrame(step);
-    }
-    
-    // Start animations when document is loaded
-    document.addEventListener('DOMContentLoaded', () => {
-      // Animate desktop counters with delays
-      setTimeout(() => animateValue('desktop-customer-count', 0, 75, 2000), 1000);
-      setTimeout(() => animateValue('desktop-product-count', 0, 60, 2000), 1300);
-      setTimeout(() => animateValue('desktop-accuracy-value', 0, 99, 2000, true), 1600);
-      setTimeout(() => animateValue('desktop-countries-count', 0, 15, 2000), 1900);
-      
-      // Animate mobile counters with delays
-      setTimeout(() => animateValue('mobile-customer-count', 0, 75, 2000), 1000);
-      setTimeout(() => animateValue('mobile-product-count', 0, 60, 2000), 1300);
-      setTimeout(() => animateValue('mobile-accuracy-value', 0, 99, 2000, true), 1600);
-      setTimeout(() => animateValue('mobile-countries-count', 0, 15, 2000), 1900);
-      
-      // Add hover/click effects to desktop cards
-      const cards = document.querySelectorAll('.card');
-      cards.forEach(card => {
-        card.addEventListener('mouseenter', () => {
-          // Create and animate particles for desktop
-          for (let i = 0; i < 8; i++) {
-            createParticle(card);
-          }
-        });
-        
-        card.addEventListener('click', () => {
-          card.style.transform = 'scale(0.95)';
-          setTimeout(() => {
-            card.style.transform = '';
-          }, 200);
-        });
-      });
-      
-      // Add effects to mobile card
-      const mobileCard = document.querySelector('.mobile-card-container');
-      mobileCard.addEventListener('click', () => {
-        mobileCard.style.transform = 'scale(0.98)';
-        setTimeout(() => {
-          mobileCard.style.transform = '';
-        }, 200);
-        
-        // Create particles on mobile card tap
-        const mobileStats = document.querySelectorAll('.mobile-stat');
-        mobileStats.forEach(stat => {
-          createMobileParticle(stat);
-        });
-      });
-      
-      // Add specific animation to mobile stat icons on tap
-      document.querySelectorAll('.mobile-stat').forEach(stat => {
-        stat.addEventListener('click', (e) => {
-          e.stopPropagation();
-          const icon = stat.querySelector('.mobile-stat-icon');
-          icon.style.transform = 'scale(1.2) rotate(10deg)';
-          setTimeout(() => {
-            icon.style.transform = '';
-          }, 300);
-          
-          // Create particles just for this stat
-          for (let i = 0; i < 3; i++) {
-            createMobileParticle(stat);
-          }
-        });
-      });
-    });
-    
-    // Function to create particles for desktop cards
-    function createParticle(parent) {
-      const particle = document.createElement('div');
-      particle.style.position = 'absolute';
-      particle.style.width = `${Math.random() * 10 + 5}px`;
-      particle.style.height = particle.style.width;
-      particle.style.background = getComputedStyle(parent).getPropertyValue('--card-color');
-      particle.style.borderRadius = '50%';
-      particle.style.opacity = '0.6';
-      particle.style.pointerEvents = 'none';
-      
-      // Set random starting position
-      const startX = 50 + (Math.random() * 150);
-      const startY = 70 + (Math.random() * 80);
-      particle.style.left = `${startX}px`;
-      particle.style.top = `${startY}px`;
-      
-      // Add particle to parent
-      parent.appendChild(particle);
-      
-      // Animate particle
-      const animation = particle.animate([
-        { 
-          transform: 'translate(0, 0)', 
-          opacity: 0.6 
-        },
-        { 
-          transform: `translate(${(Math.random() - 0.5) * 100}px, ${-Math.random() * 100 - 20}px)`, 
-          opacity: 0 
-        }
-      ], {
-        duration: 1000 + Math.random() * 1000,
-        easing: 'cubic-bezier(0.1, 0.7, 1.0, 0.1)'
-      });
-      
-      // Remove particle after animation
-      animation.onfinish = () => {
-        particle.remove();
-      };
-    }
-    
-    // Function to create particles for mobile stats
-    function createMobileParticle(parent) {
-      const particle = document.createElement('div');
-      particle.style.position = 'absolute';
-      particle.style.width = `${Math.random() * 5 + 3}px`;
-      particle.style.height = particle.style.width;
-      
-      // Get color from value element
-      const valueEl = parent.querySelector('.mobile-stat-value');
-      particle.style.background = getComputedStyle(valueEl).color;
-      
-      particle.style.borderRadius = '50%';
-      particle.style.opacity = '0.6';
-      particle.style.pointerEvents = 'none';
-      
-      // Set random starting position based on icon
-      const icon = parent.querySelector('.mobile-stat-icon');
-      const rect = icon.getBoundingClientRect();
-      const parentRect = parent.getBoundingClientRect();
-      
-      const startX = rect.width/2;
-      const startY = rect.height/2;
-      particle.style.left = `${startX}px`;
-      particle.style.top = `${startY}px`;
-      
-      // Add particle to icon element
-      icon.appendChild(particle);
-      
-      // Animate particle
-      const animation = particle.animate([
-        { 
-          transform: 'translate(0, 0)', 
-          opacity: 0.6 
-        },
-        { 
-          transform: `translate(${(Math.random() - 0.5) * 30}px, ${-Math.random() * 30 - 10}px)`, 
-          opacity: 0 
-        }
-      ], {
-        duration: 600 + Math.random() * 400,
-        easing: 'cubic-bezier(0.1, 0.7, 1.0, 0.1)'
-      });
-      
-      // Remove particle after animation
-      animation.onfinish = () => {
-        particle.remove();
-      };
-    }
-  </script>
+            <div class="scroll-down"></div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Array of image URLs - dynamically loaded
+            // Image URLs to load dynamically
             const imageUrls = [
-                '/mainbg1.jpg','/mainbg2.jpg','/mainbg3.jpg','/mainbg4.jpg','/mainbg5.jpg'
+                "https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+                "https://images.pexels.com/photos/380769/pexels-photo-380769.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+                "https://images.pexels.com/photos/7439146/pexels-photo-7439146.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+                "https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
             ];
-            
-            const sliderContainer = document.querySelector('.slider');
-            const dotsContainer = document.querySelector('.slider-controls');
-            const prevArrow = document.querySelector('.prev-arrow');
-            const nextArrow = document.querySelector('.next-arrow');
-            const scrollDownBtn = document.querySelector('.scroll-down');
+
+            // Slider elements
+            const heroContainer = document.querySelector('.hero-container');
+            const slides = document.querySelectorAll('.slide');
+            const loaders = document.querySelectorAll('.loader');
+            const leftArrow = document.querySelector('.arrow-left');
+            const rightArrow = document.querySelector('.arrow-right');
+            const heading = document.querySelector('.hero-content h1');
+            const paragraph = document.querySelector('.hero-content p');
+            const form = document.querySelector('.enquiry-form');
             
             let currentSlide = 0;
             let slideInterval;
-            
-            // Create slides dynamically
-            function createSlides() {
-                imageUrls.forEach((url, index) => {
-                    const slide = document.createElement('div');
-                    slide.className = index === 0 ? 'slide active' : 'slide';
-                    slide.style.backgroundImage = `url('${url}')`;
-                    sliderContainer.appendChild(slide);
+            let imagesLoaded = 0;
+
+            // Function to dynamically load images
+            function loadImages() {
+                slides.forEach((slide, index) => {
+                    const img = new Image();
+                    img.src = imageUrls[index];
+                    img.alt = `Slide image ${index + 1}`;
                     
-                    const dot = document.createElement('div');
-                    dot.className = index === 0 ? 'slider-dot active' : 'slider-dot';
-                    dot.dataset.index = index;
-                    dotsContainer.appendChild(dot);
+                    img.onload = function() {
+                        // Remove loader and append image once loaded
+                        slide.appendChild(img);
+                        loaders[index].style.display = 'none';
+                        imagesLoaded++;
+                        
+                        // When all images are loaded, start animations and slideshow
+                        if (imagesLoaded === slides.length) {
+                            startAnimations();
+                        }
+                    };
                     
-                    // Add click event listener to each dot
-                    dot.addEventListener('click', () => {
-                        goToSlide(index);
-                    });
+                    img.onerror = function() {
+                        // Handle image loading error
+                        loaders[index].style.display = 'none';
+                        const errorMsg = document.createElement('div');
+                        errorMsg.textContent = 'Image failed to load';
+                        errorMsg.style.color = 'white';
+                        errorMsg.style.textAlign = 'center';
+                        errorMsg.style.position = 'absolute';
+                        errorMsg.style.top = '50%';
+                        errorMsg.style.left = '50%';
+                        errorMsg.style.transform = 'translate(-50%, -50%)';
+                        slide.appendChild(errorMsg);
+                        
+                        imagesLoaded++;
+                        if (imagesLoaded === slides.length) {
+                            startAnimations();
+                        }
+                    };
                 });
             }
-            
-            // Go to specific slide
-            function goToSlide(index) {
-                // Clear existing interval
-                clearInterval(slideInterval);
+
+            // Trigger animations when images are loaded
+            function startAnimations() {
+                // Animate the container in
+                heroContainer.classList.add('loaded');
                 
-                const slides = document.querySelectorAll('.slide');
-                const dots = document.querySelectorAll('.slider-dot');
+                // Animate content elements in sequence
+                setTimeout(() => {
+                    heading.classList.add('visible');
+                    
+                    setTimeout(() => {
+                        paragraph.classList.add('visible');
+                        
+                        setTimeout(() => {
+                            form.classList.add('visible');
+                            leftArrow.classList.add('visible');
+                            rightArrow.classList.add('visible');
+                        }, 200);
+                    }, 200);
+                }, 300);
                 
-                slides[currentSlide].classList.remove('active');
-                dots[currentSlide].classList.remove('active');
+                // Start the slideshow
+                startSlideshow();
+            }
+
+            // Function to show a specific slide
+            function showSlide(index) {
+                // Remove active class from all slides
+                slides.forEach(slide => slide.classList.remove('active'));
                 
+                // Add active class to current slide
+                slides[index].classList.add('active');
+                
+                // Update current slide index
                 currentSlide = index;
-                
-                // Handle wrapping
-                if (currentSlide < 0) {
-                    currentSlide = slides.length - 1;
-                } else if (currentSlide >= slides.length) {
-                    currentSlide = 0;
-                }
-                
-                slides[currentSlide].classList.add('active');
-                dots[currentSlide].classList.add('active');
-                
-                // Restart interval
-                startSlideInterval();
             }
-            
-            // Go to next slide
+
+            // Function to show next slide
             function nextSlide() {
-                goToSlide(currentSlide + 1);
+                let nextIndex = currentSlide + 1;
+                if (nextIndex >= slides.length) {
+                    nextIndex = 0;
+                }
+                showSlide(nextIndex);
             }
-            
-            // Go to previous slide
+
+            // Function to show previous slide
             function prevSlide() {
-                goToSlide(currentSlide - 1);
+                let prevIndex = currentSlide - 1;
+                if (prevIndex < 0) {
+                    prevIndex = slides.length - 1;
+                }
+                showSlide(prevIndex);
             }
-            
-            // Start automatic sliding
-            function startSlideInterval() {
+
+            // Start automatic slideshow
+            function startSlideshow() {
                 slideInterval = setInterval(nextSlide, 5000);
             }
-            
-            // Initialize the slider
-            function initSlider() {
-                createSlides();
-                startSlideInterval();
-                
-                // Add click events to arrows
-                prevArrow.addEventListener('click', () => {
-                    prevSlide();
-                });
-                
-                nextArrow.addEventListener('click', () => {
-                    nextSlide();
-                });
-                
-                // Add swipe functionality for mobile devices
-                let touchStartX = 0;
-                let touchEndX = 0;
-                
-                sliderContainer.addEventListener('touchstart', (e) => {
-                    touchStartX = e.changedTouches[0].screenX;
-                }, false);
-                
-                sliderContainer.addEventListener('touchend', (e) => {
-                    touchEndX = e.changedTouches[0].screenX;
-                    handleSwipe();
-                }, false);
-                
-                function handleSwipe() {
-                    if (touchEndX < touchStartX - 50) {
-                        // Swipe left, go to next slide
-                        nextSlide();
-                    } else if (touchEndX > touchStartX + 50) {
-                        // Swipe right, go to previous slide
-                        prevSlide();
-                    }
-                }
-                
-                // Preload images for smoother transitions
-                function preloadImages() {
-                    imageUrls.forEach(url => {
-                        const img = new Image();
-                        img.src = url;
-                    });
-                }
-                
-                preloadImages();
+
+            // Reset slideshow timer
+            function resetSlideshow() {
+                clearInterval(slideInterval);
+                startSlideshow();
             }
-            
-            // Initialize the slider
-            initSlider();
-            
-            // Scroll down button functionality
-            scrollDownBtn.addEventListener('click', function() {
-                const contentHeight = document.querySelector('.hero-slider').offsetHeight + 
-                                      document.querySelector('.content-below').offsetHeight;
-                window.scrollTo({
-                    top: contentHeight,
-                    behavior: 'smooth'
-                });
+
+            // Add click event to arrows
+            rightArrow.addEventListener('click', function() {
+                nextSlide();
+                resetSlideshow();
+            });
+
+            leftArrow.addEventListener('click', function() {
+                prevSlide();
+                resetSlideshow();
             });
             
-            // Keyboard navigation
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'ArrowLeft') {
-                    prevSlide();
-                } else if (e.key === 'ArrowRight') {
-                    nextSlide();
-                }
+            // Make form interactive
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const email = document.querySelector('.email-input').value;
+                alert(`Thank you! We'll contact you at ${email} soon.`);
+                this.reset();
             });
+            
+            // Start loading images
+            loadImages();
         });
     </script>
     
@@ -649,84 +674,5 @@
             });
         });
     </script>
-
-    <script>
-        const sentences = [
-          "Vikram",
-          "Mahendra",
-          "Nakul",
-          "Bhupendra"
-        ];
-    
-        let index = 0;
-        const sentenceElement = document.querySelector(".hero-tagline");
-        let word;
-    
-        setInterval(() => {
-          index = (index + 1) % sentences.length;
-          word = sentences[index];
-        }, 3000);
-
-        // Returns a random uppercase letter between 'A' and 'Z'
-        function getRandomLetter() {
-          const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-          return alphabet[Math.floor(Math.random() * alphabet.length)];
-        }
-    
-        // Animate a single letter. It displays random letters until it settles on targetLetter.
-        function animateLetter(span, targetLetter, speed = 75, iterations = 10) {
-          let count = 0;
-          const interval = setInterval(() => {
-            if (count < iterations) {
-              span.textContent = getRandomLetter();
-              count++;
-            } else {
-              clearInterval(interval);
-              span.textContent = targetLetter;
-            }
-          }, speed);
-        }
-    
-        // Generate the animation for each letter in the provided word
-        function generateSequences(word) {
-          const resultDiv = document.getElementById("hero-tagline");
-          resultDiv.innerHTML = "";
-    
-          const wordContainer = document.createElement("div");
-          wordContainer.className = "animated-word";
-          resultDiv.appendChild(wordContainer);
-    
-          for (let i = 0; i < word.length; i++) {
-            const targetChar = word[i];
-            const upperTarget = targetChar.toUpperCase();
-            const span = document.createElement("span");
-            span.className = "letter";
-            wordContainer.appendChild(span);
-    
-            if (upperTarget < 'A' || upperTarget > 'Z') {
-              span.textContent = targetChar;
-              continue;
-            }
-    
-            animateLetter(span, upperTarget, 75, 10);
-          }
-        }
-    
-        document.getElementById("generateBtn").addEventListener("click", function() {
-          const wordInput = document.getElementById("wordInput").value.trim();
-          if (wordInput) {
-            generateSequences(wordInput);
-          } else {
-            alert("Please enter a word!");
-          }
-        });
-    
-            word = this.value.trim();
-          if (word) {
-            generateSequences(word);
-          } else {
-            document.querySelector(".hero-tagline").innerHTML = "";
-          }
-      </script>
 </body>
 </html>
