@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Woodland Crafts</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #ffffff;
+            color: #333333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo-container {
+            text-align: center;
+            padding: 20px 0;
+            background-color: #ffffff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: #333333;
+            display: inline-block;
+        }
+
+        .logo span {
+            color: #a67c52;
+        }
+
+        .hero {
+            height: 60vh;
+            background: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), url('/api/placeholder/1200/800') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #333333;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 20px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 1s forwards 0.5s;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+            color: #333333;
+        }
+
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            color: #555555;
+        }
+
+        .about-section {
+            padding: 80px 0;
+            background-color: #ffffff;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 36px;
+            font-weight: 600;
+            color: #333333;
+            display: inline-block;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 70px;
+            height: 3px;
+            background-color: #a67c52;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 40px;
+        }
+
+        .about-text {
+            flex: 1;
+            padding: 20px;
+            min-width: 300px;
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 1s forwards;
+            color: #555555;
+        }
+
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.5s ease;
+        }
+
+        .about-image:hover {
+            transform: scale(1.03);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .about-image:hover img {
+            transform: scale(1.1);
+        }
+
+        .values-section {
+            background-color: #f9f9f9;
+            color: #333333;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .values-title h2 {
+            color: #333333;
+        }
+
+        .values-title h2::after {
+            background-color: #a67c52;
+        }
+
+        .values-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .value-card {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 30px;
+            width: 300px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            opacity: 0;
+            animation: fadeIn 1s forwards;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .value-card:nth-child(1) { animation-delay: 0.2s; }
+        .value-card:nth-child(2) { animation-delay: 0.4s; }
+        .value-card:nth-child(3) { animation-delay: 0.6s; }
+
+        .value-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            background-color: #ffffff;
+        }
+
+        .value-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: #a67c52;
+        }
+
+        .value-card h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #333333;
+        }
+
+        .value-card p {
+            color: #555555;
+        }
+
+        .team-section {
+            padding: 80px 0;
+            background-color: #ffffff;
+        }
+
+        .team-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .team-member {
+            width: 280px;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 1s forwards;
+        }
+
+        .team-member:nth-child(1) { animation-delay: 0.2s; }
+        .team-member:nth-child(2) { animation-delay: 0.4s; }
+        .team-member:nth-child(3) { animation-delay: 0.6s; }
+
+        .member-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto 20px;
+            position: relative;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .member-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .member-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(166, 124, 82, 0.3);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            z-index: 1;
+        }
+
+        .team-member:hover .member-image img {
+            transform: scale(1.1);
+        }
+
+        .team-member:hover .member-image::before {
+            opacity: 1;
+        }
+
+        .team-member h3 {
+            font-size: 22px;
+            margin-bottom: 5px;
+            color: #333333;
+        }
+
+        .team-member p {
+            color: #555555;
+            margin-bottom: 15px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .social-link {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: #333333;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background-color: #a67c52;
+            transform: translateY(-3px);
+        }
+
+        .contact-section {
+            padding: 80px 0;
+            background-color: #f9f9f9;
+            text-align: center;
+        }
+
+        .contact-title h2 {
+            color: #333333;
+        }
+
+        .contact-title h2::after {
+            background-color: #a67c52;
+        }
+
+        .contact-details {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .contact-item {
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            width: 280px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+            opacity: 0;
+            animation: fadeIn 1s forwards;
+        }
+
+        .contact-item:nth-child(1) { animation-delay: 0.2s; }
+        .contact-item:nth-child(2) { animation-delay: 0.4s; }
+        .contact-item:nth-child(3) { animation-delay: 0.6s; }
+
+        .contact-item:hover {
+            transform: translateY(-10px);
+        }
+
+        .contact-icon {
+            font-size: 36px;
+            color: #a67c52;
+            margin-bottom: 20px;
+        }
+
+        .contact-item h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #333333;
+        }
+
+        .contact-item p {
+            color: #555555;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: #a67c52;
+            color: #ffffff;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            border: 2px solid #a67c52;
+        }
+
+        .cta-button:hover {
+            background-color: transparent;
+            color: #a67c52;
+        }
+
+        footer {
+            background-color: #333333;
+            color: #f1f1f1;
+            padding: 40px 0 20px;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 250px;
+            padding: 0 20px;
+            margin-bottom: 20px;
+        }
+
+        .footer-column h3 {
+            color: #a67c52;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 2px;
+            background-color: #a67c52;
+            bottom: 0;
+            left: 0;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #f1f1f1;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #a67c52;
+        }
+
+        .copyright {
+            border-top: 1px solid #444;
+            padding-top: 20px;
+            font-size: 14px;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 32px;
+            }
+            
+            .hero p {
+                font-size: 16px;
+            }
+            
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .about-image {
+                margin-top: 30px;
+                width: 100%;
+            }
+            
+            .section-title h2 {
+                font-size: 28px;
+            }
+            
+            /* Stack values cards vertically on mobile */
+            .values-grid {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .value-card {
+                width: 90%;
+                max-width: 400px;
+                margin-bottom: 20px;
+            }
+            
+            /* Make team members appear in a row on mobile with smaller size */
+            .team-grid {
+                flex-direction: row;
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                gap: 15px;
+                padding: 10px 0;
+                justify-content: flex-start;
+            }
+            
+            .team-member {
+                min-width: 140px;
+                width: 140px;
+                flex-shrink: 0;
+            }
+            
+            .member-image {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .team-member h3 {
+                font-size: 16px;
+            }
+            
+            .team-member p {
+                font-size: 12px;
+            }
+            
+            .social-links {
+                gap: 8px;
+            }
+            
+            .social-link {
+                width: 28px;
+                height: 28px;
+                font-size: 12px;
+            }
+            
+            /* Make contact items appear in a row on mobile with smaller size */
+            .contact-details {
+                flex-direction: row;
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                gap: 15px;
+                padding: 10px 0;
+                justify-content: flex-start;
+            }
+            
+            .contact-item {
+                min-width: 140px;
+                width: 140px;
+                padding: 15px;
+                flex-shrink: 0;
+            }
+            
+            .contact-icon {
+                font-size: 24px;
+                margin-bottom: 10px;
+            }
+            
+            .contact-item h3 {
+                font-size: 16px;
+            }
+            
+            .contact-item p {
+                font-size: 12px;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .footer-column h3::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 28px;
+            }
+            
+            .hero {
+                height: 50vh;
+            }
+            
+            .about-section, .values-section, .team-section, .contact-section {
+                padding: 50px 0;
+            }
+            
+            .value-card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="logo-container">
+        <div class="logo">Wood<span>Craft</span></div>
+    </div>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Crafting Nature's Beauty Into Your Home</h1>
+            <p>We are a team of passionate artisans dedicated to creating exquisite wooden furniture and lighting solutions that bring warmth and character to your space.</p>
+        </div>
+    </section>
+
+    <section class="about-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Story</h2>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Founded in 2010, WoodCraft began as a small workshop in a countryside barn with a simple mission: to create beautiful, sustainable wooden furnishings that stand the test of time.</p>
+                    <p>What started as a passion project between two friends has grown into a thriving business with a team of skilled craftspeople who share our commitment to quality, sustainability, and timeless design.</p>
+                    <p>Every piece we create tells a story of dedication, craftsmanship, and our deep respect for the natural materials we work with. We carefully select the finest sustainable timber, combining traditional woodworking techniques with contemporary design to create pieces that are both functional and aesthetically stunning.</p>
+                </div>
+                <div class="about-image">
+                    <img src="/api/placeholder/600/400" alt="Our workshop">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="values-section">
+        <div class="container">
+            <div class="section-title values-title">
+                <h2>Our Values</h2>
+            </div>
+            <div class="values-grid">
+                <div class="value-card">
+                    <div class="value-icon">🌲</div>
+                    <h3>Sustainability</h3>
+                    <p>We source all our materials responsibly, working with suppliers who share our commitment to sustainable forestry practices. For every tree used, we ensure another is planted.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">⚒️</div>
+                    <h3>Craftsmanship</h3>
+                    <p>We believe in quality over quantity. Each piece is meticulously crafted by hand, ensuring exceptional attention to detail and a product that will last for generations.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">🎨</div>
+                    <h3>Innovation</h3>
+                    <p>While respecting traditional techniques, we continuously explore new designs and technologies to create furniture and lighting that meets contemporary needs and aesthetics.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="team-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Meet Our Team</h2>
+            </div>
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="/api/placeholder/200/200" alt="James Wilson">
+                    </div>
+                    <h3>James Wilson</h3>
+                    <p>Founder & Master Craftsman</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">in</a>
+                        <a href="#" class="social-link">f</a>
+                        <a href="#" class="social-link">ig</a>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="/api/placeholder/200/200" alt="Sarah Chen">
+                    </div>
+                    <h3>Sarah Chen</h3>
+                    <p>Lead Designer</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">in</a>
+                        <a href="#" class="social-link">f</a>
+                        <a href="#" class="social-link">ig</a>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="/api/placeholder/200/200" alt="Miguel Rodriguez">
+                    </div>
+                    <h3>Miguel Rodriguez</h3>
+                    <p>Lighting Specialist</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">in</a>
+                        <a href="#" class="social-link">f</a>
+                        <a href="#" class="social-link">ig</a>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="/api/placeholder/200/200" alt="Emma Johnson">
+                    </div>
+                    <h3>Emma Johnson</h3>
+                    <p>Customer Relations</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">in</a>
+                        <a href="#" class="social-link">f</a>
+                        <a href="#" class="social-link">ig</a>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="/api/placeholder/200/200" alt="David Lee">
+                    </div>
+                    <h3>David Lee</h3>
+                    <p>Production Manager</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">in</a>
+                        <a href="#" class="social-link">f</a>
+                        <a href="#" class="social-link">ig</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-section">
+        <div class="container">
+            <div class="section-title contact-title">
+                <h2>Get In Touch</h2>
+            </div>
+            <div class="contact-details">
+                <div class="contact-item">
+                    <div class="contact-icon">📍</div>
+                    <h3>Visit Us</h3>
+                    <p>123 Woodland Way<br>Craftsville, CW 12345</p>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">📞</div>
+                    <h3>Call Us</h3>
+                    <p>+1 (555) 123-4567<br>Mon-Fri: 9am-5pm</p>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">✉️</div>
+                    <h3>Email Us</h3>
+                    <p>info@woodcraft.com<br>support@woodcraft.com</p>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">🕒</div>
+                    <h3>Hours</h3>
+                    <p>Mon-Fri: 9am-6pm<br>Sat: 10am-4pm</p>
+                </div>
+            </div>
+            <a href="#" class="cta-button">Schedule a Consultation</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>WoodCraft</h3>
+                    <p>Bringing the beauty of natural wood into your home with handcrafted furniture and lighting solutions.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Products</a></li>
+                        <li><a href="#">Gallery</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Connect With Us</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Facebook</a></li>
+                        <li><a href="#">Instagram</a></li>
+                        <li><a href="#">Pinterest</a></li>
+                        <li><a href="#">LinkedIn</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 WoodCraft. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate elements when they come into view
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            // Observe all paragraphs in about section
+            document.querySelectorAll('.about-text p').forEach(p => {
+                observer.observe(p);
+            });
+
+            // Animate logo on page load
+            const logoText = document.querySelector('.logo');
+            logoText.style.opacity = '0';
+            logoText.style.transform = 'translateY(-20px)';
+            
+            setTimeout(() => {
+                logoText.style.transition = 'all 1s ease';
+                logoText.style.opacity = '1';
+                logoText.style.transform = 'translateY(0)';
+            }, 300);
+            
+            // Add pulse effect to CTA button
+            const ctaButton = document.querySelector('.cta-button');
+            
+            setInterval(() => {
+                ctaButton.style.transition = 'transform 0.5s ease, box-shadow 0.5s ease, background-color 0.3s ease, color 0.3s ease';
+                ctaButton.style.transform = 'scale(1.05)';
+                ctaButton.style.boxShadow = '0 0 15px rgba(166, 124, 82, 0.5)';
+                
+                setTimeout(() => {
+                    ctaButton.style.transform = 'scale(1)';
+                    ctaButton.style.boxShadow = '0 0 0 rgba(166, 124, 82, 0)';
+                }, 500);
+            }, 3000);
+            
+            // Check if on mobile for simpler animations
+            const isMobile = window.innerWidth <= 768;
+            
+            if (!isMobile) {
+                // More elaborate animations for desktop
+                const teamMembers = document.querySelectorAll('.team-member');
+                const valueCards = document.querySelectorAll('.value-card');
+                
+                teamMembers.forEach(member => {
+                    member.addEventListener('mouseenter', () => {
+                        const img = member.querySelector('img');
+                        img.style.transition = 'transform 0.5s ease';
+                        img.style.transform = 'scale(1.1)';
+                        
+                        const name = member.querySelector('h3');
+                        name.style.transition = 'color 0.3s ease';
+                        name.style.color = '#a67c52';
+                    });
+                    
+                    member.addEventListener('mouseleave', () => {
+                        const img = member.querySelector('img');
+                        img.style.transform = 'scale(1)';
+                        
+                        const name = member.querySelector('h3');
+                        name.style.color = '#333333';
+                    });
+                });
+                
+                valueCards.forEach(card => {
+                    card.addEventListener('mouseenter', () => {
+                        card.style.transition = 'transform 0.3s ease, box-shadow 0.3s ease';
+                        card.style.transform = 'translateY(-10px)';
+                        card.style.boxShadow = '0 15px 30px rgba(0, 0, 0, 0.1)';
+                        
+                        const icon = card.querySelector('.value-icon');
+                        icon.style.transition = 'transform 0.5s ease';
+                        icon.style.transform = 'scale(1.2) rotate(5deg)';
+                        
+                        setTimeout(() => {
+                            icon.style.transform = 'scale(1.2) rotate(-5deg)';
+                            setTimeout(() => {
+                                icon.style.transform = 'scale(1.2) rotate(0)';
+                            }, 200);
+                        }, 200);
+                    });
+                    
+                    card.addEventListener('mouseleave', () => {
+                        card.style.transform = 'translateY(0)';
+                        card.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.05)';
+                        
+                        const icon = card.querySelector('.value-icon');
+                        icon.style.transform = 'scale(1)';
+                    });
+                });
+            }
+            
+            // Add scroll indication for horizontal scrollable sections on mobile
+            if (isMobile) {
+                const teamGrid = document.querySelector('.team-grid');
+                const contactDetails = document.querySelector('.contact-details');
+                
+                // Add subtle horizontal scroll animation to draw attention
+                const addScrollHint = (element) => {
+                    if (element && element.scrollWidth > element.clientWidth) {
+                        element.style.scrollBehavior = 'smooth';
+                        
+                        // Initial scroll hint animation
+                        setTimeout(() => {
+                            element.scrollLeft = 40;
+                            setTimeout(() => {
+                                element.scrollLeft = 0;
+                            }, 800);
+                        }, 1000);
+                    }
+                };
+                
+                addScrollHint(teamGrid);
+                addScrollHint(contactDetails);
+            }
+        });
+    </script>
+</body>
+</html>
