@@ -604,18 +604,18 @@
       let isForward = false;
 
       window.addEventListener('scroll', () => {
-        if (window.scrollY < 50 && !isForward) {
+        if (window.scrollY < 500 && !isForward) {
           isForward = true;
           navbar.classList.add("scrolled");
-          boxes.forEach(box => {
+          finalBox.style.left = centerPosition;
+            finalBox.style.opacity = "1";
+          setTimeout(() => {
+            boxes.forEach(box => {
             box.style.left = centerPosition;
             box.style.opacity = "0";
           });
-          setTimeout(() => {
-            finalBox.style.left = centerPosition;
-            finalBox.style.opacity = "1";
           }, 100);
-        } else if (window.scrollY >= 50 && isForward) {
+        } else if (window.scrollY >= 500 && isForward) {
           isForward = false;
           navbar.classList.remove("scrolled");
           boxes.forEach((box, index) => {
