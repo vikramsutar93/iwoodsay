@@ -64,17 +64,17 @@
     }
 
     .final-box {
-      background-image: url(/Wsymbol.png);
+      background-image: url(Media/Wsymbol.png);
       opacity: 0;
     }
 
-    .i { background-image: url(/WI.png); }
-    .w { background-image: url(/WW.png); }
-    .symbol { background-image: url(/Wsymbol.png); }
-    .d { background-image: url(/WD.png); }
-    .s { background-image: url(/WS.png); }
-    .a { background-image: url(/WA.png); }
-    .y { background-image: url(/WY.png); }
+    .i { background-image: url(Media/WI.png); }
+    .w { background-image: url(Media/WW.png); }
+    .symbol { background-image: url(Media/Wsymbol.png); }
+    .d { background-image: url(Media/WD.png); }
+    .s { background-image: url(Media/WS.png); }
+    .a { background-image: url(Media/WA.png); }
+    .y { background-image: url(Media/WY.png); }
 
     .menu-button {
       background-color: #cc0000;
@@ -259,7 +259,7 @@
     }
 
     .cursive{
-      background-image: url(/Cursivewhite.png);
+      background-image: url(Media/Cursivewhite.png);
       background-position: center;
       background-repeat: no-repeat;
       background-size:  cover;
@@ -422,7 +422,7 @@
   <section class="hero">
     <div id="bg">
       <svg id="animationlogo" version="1.0" 
-  viewBox="0 0 1000.000000 1500.000000"
+  viewBox="-350 -100 1500.000000 3000.000000"
   preserveAspectRatio="xMidYMid meet">
   <linearGradient id="grad1" x1="0%" x2="0%" y1="0%" y2="100%">
      <stop offset="0%" stop-color="white" />
@@ -433,7 +433,7 @@
      <stop offset="100%" stop-color="black" />
    </linearGradient>
 
-  <g id="bulb1" transform="translate(0.000000,900.000000) scale(0.100000,-0.100000)"
+  <g id="bulb1" transform="translate(-700.000000,2400.000000) scale(0.300000,-0.300000)"
     fill="none" stroke="url(#grad1)">
       <path d="M2300 7947 c0 -579 -4 -1057 -8 -1063 -4 -5 -5 -126 -1 -269 3 -143
   4 -263 2 -267 -2 -5 -28 -8 -56 -8 -63 0 -97 -9 -97 -24 0 -6 10 -16 23 -21
@@ -481,7 +481,7 @@
   29 73 58 73 63 0 14 -38 12 -80 -4z"/>
 </g>
 
-<g id="bulb2" transform="translate(0.000000,900.000000) scale(0.100000,-0.100000)"
+<g id="bulb2" transform="translate(-900.000000,2400.000000) scale(0.300000,-0.300000)"
     fill="none" stroke="url(#grad1)">
 
       <path d="M4458 8943 c-3 -32 -5 -961 -4 -2065 l1 -2008 -87 0 c-50 0 -90 -4
@@ -531,7 +531,7 @@
       244 19 115 59 184 165 281 65 60 110 125 85 123 -7 0 -34 -12 -61 -25z"/>
 </g>
 
-<g id="bulb3" transform="translate(0.000000,900.000000) scale(0.100000,-0.100000)"
+<g id="bulb3" transform="translate(-1200.000000,2400.000000) scale(0.300000,-0.300000)"
     fill="none" stroke="url(#grad1)">
 <path d="M6723 8728 c4 -150 7 -878 8 -1618 1 -1340 1 -1344 -19 -1361 -18
 -14 -19 -18 -6 -31 11 -11 16 -64 22 -238 9 -287 8 -298 -26 -311 -50 -19 -52
@@ -672,20 +672,21 @@
     let scroll = this.scrollY;
     let bx1,bx2,by1,su;
 
-    bx = -(scroll *10);
-    bx1 = -(scroll *11);
-    su = 0.1+(scroll * 0.0025);
-    by1 = 900+(scroll*10);
-    by2 = 900+(scroll*20);
+    bx = -(700+(scroll *10));
+    bx1 = -(900+(scroll*11));
+    bx2 = -(1200+(scroll*10));
+    su = 0.3+(scroll * 0.0025);
+    by1 = 2400+(scroll*10);
+    by2 = 2400+(scroll*20);
 
     if(scroll > 0 && scroll < screen.availHeight ){
-        let x = ((150 - scroll)*0.0025);
+        let x = ((100 - scroll)*0.0025);
         let y = (400 - scroll)*1.5;
         animationlogo.style.opacity = x;
         animationlogo.style.transform = "translateY("+y+");";
         bulb1.setAttribute("transform","translate("+bx+","+by1+") scale("+su+",-"+su+")");
         bulb2.setAttribute("transform","translate("+bx1+","+by2+") scale("+su+",-"+su+")");
-        bulb3.setAttribute("transform","translate("+bx+","+by1+") scale("+su+",-"+su+")");
+        bulb3.setAttribute("transform","translate("+bx2+","+by1+") scale("+su+",-"+su+")");
     }
     
 });
