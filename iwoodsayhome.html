@@ -60,12 +60,12 @@
     }
 
     .box {
-      opacity: 1;
+      opacity: 0;
     }
 
     .final-box {
       background-image: url(/Wsymbol.png);
-      opacity: 0;
+      opacity: 1;
     }
 
     .i { background-image: url(/WI.png); }
@@ -393,7 +393,7 @@
       <div class="box s" style="left: 225px;"></div>
       <div class="box a" style="left: 260px;"></div>
       <div class="box y" style="left: 290px;"></div>
-      <div class="final-box"></div>
+      <div class="final-box" style="left: 180px"></div>
     </div>
     <button class="menu-button" aria-label="Open Menu">
       <svg class="menu-icon" viewBox="0 0 24 24">
@@ -609,20 +609,20 @@
           navbar.classList.add("scrolled");
           boxes.forEach(box => {
             box.style.left = centerPosition;
-            box.style.opacity = "0";
+            box.style.opacity = "1";
           });
           setTimeout(() => {
             finalBox.style.left = centerPosition;
-            finalBox.style.opacity = "1";
+            finalBox.style.opacity = "0";
           }, 100);
         } else if (window.scrollY <= 50 && isForward) {
           isForward = false;
           navbar.classList.remove("scrolled");
           boxes.forEach((box, index) => {
             box.style.left = originalPositions[index];
-            box.style.opacity = "1";
+            box.style.opacity = "0";
           });
-          finalBox.style.opacity = "0";
+          finalBox.style.opacity = "1";
         }
       });
     });
