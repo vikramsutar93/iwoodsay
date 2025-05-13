@@ -602,7 +602,7 @@
           navbar.classList.remove("scrolled");
 
         if (window.scrollY < 500 && !isForward) {
-          isForward = true;
+          isForward = false;
           finalBox.style.left = centerPosition;
             finalBox.style.opacity = "1";
           setTimeout(() => {
@@ -612,7 +612,7 @@
           });
           }, 100);
         } else if (window.scrollY >= 500 && isForward) {
-          isForward = false;
+          isForward = true;
           boxes.forEach((box, index) => {
             box.style.left = originalPositions[index];
             box.style.opacity = "1";
