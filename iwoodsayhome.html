@@ -668,6 +668,7 @@
     window.addEventListener("scroll", (event) => {
     
     let scroll = this.scrollY;
+    scroll = scroll /3;
     let bx1,bx2,by1,su;
 
     bx = -(700+(scroll *10));
@@ -675,7 +676,7 @@
     bx2 = -(1200+(scroll*10));
     su = 0.3+(scroll * 0.0025);
     by1 = 2400+(scroll*10);
-    by2 = 2400+(scroll*20);
+    by2 = 2400+(scroll*15);
 
     if(scroll > 0 && scroll < screen.availHeight ){
         let x = ((100 - scroll)*0.0025);
