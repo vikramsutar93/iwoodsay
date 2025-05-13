@@ -30,7 +30,7 @@
       background-color: transparent;
       z-index: 100;
       padding: 0 20px;
-      transition: background-color 0.4s ease-in-out, backdrop-filter 0.4s ease-in-out;
+      transition: 0.4s ease-in-out;
     }
 
     .navbar.scrolled {
@@ -598,9 +598,11 @@
       let isForward = false;
 
       window.addEventListener('scroll', () => {
+        if(window.scrollY < 50){
+          navbar.classList.remove("scrolled");
+
         if (window.scrollY < 500 && !isForward) {
           isForward = true;
-          navbar.classList.remove("scrolled");
           finalBox.style.left = centerPosition;
             finalBox.style.opacity = "1";
           setTimeout(() => {
@@ -611,12 +613,14 @@
           }, 100);
         } else if (window.scrollY >= 500 && isForward) {
           isForward = false;
-          navbar.classList.add("scrolled");
           boxes.forEach((box, index) => {
             box.style.left = originalPositions[index];
             box.style.opacity = "1";
           });
           finalBox.style.opacity = "0";
+        }
+        }else{
+          navbar.classList.add("scrolled");
         }
       });
     });
