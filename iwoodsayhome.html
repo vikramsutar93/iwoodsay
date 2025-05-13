@@ -582,7 +582,6 @@
       <div id="animatedText"></div>
     </div>
   </section>
-  <div id="screensize"></div>
 
   <script>
     // Logo + Navbar blur on scroll
@@ -591,7 +590,6 @@
       const boxes = document.querySelectorAll('.box');
       const finalBox = document.querySelector('.final-box');
       const centerPosition = "175px";
-      const sh = document.querySelector('#screensize');
 
       const originalPositions = [];
       boxes.forEach(box => {
@@ -601,7 +599,6 @@
       let isForward = false;
 
       window.addEventListener('scroll', () => {
-        sh.innerHTML = window.scrollY;
         if (window.scrollY < 500 && !isForward) {
           isForward = true;
           navbar.classList.remove("scrolled");
