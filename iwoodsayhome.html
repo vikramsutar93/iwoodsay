@@ -677,7 +677,11 @@
     by2 = 2400+(scroll*15);
 
     if(scroll > 0 && scroll < screen.availHeight ){
-        let x = ((200 - scroll)*0.004);
+      if(scroll <= 500){
+        let x = ((500 - scroll)*0.002);
+      }else{
+        x = 0;
+      }
         let y = (400 - scroll)*1.5;
         animationlogo.style.opacity = x;
         animationlogo.style.transform = "translateY("+y+");";
