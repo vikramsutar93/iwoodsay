@@ -227,7 +227,7 @@
 
     .hero {
       position: relative;
-      height: 200dvh;
+      height: 100dvh;
       overflow: hidden;
       opacity: .9;
     }
@@ -360,6 +360,84 @@
       }
     }
 
+
+
+
+
+
+    /*explore Settings*/
+    .fade-in-out {
+      opacity: 0;
+      transition: opacity 2s ease-in-out;
+    }
+
+    .fade-in-out.visible {
+      animation: fadeBody 2s ease-in-out forwards;
+    }
+
+    @keyframes fadeBody {
+      0% { opacity: 0; }
+      50% { opacity: 1; }
+      100% { opacity: 0.95; }
+    }
+
+    .explore {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: auto;
+      padding: 50px;
+    }
+
+    .explore-title {
+      font-size: 3rem;
+      font-weight: 700;
+      color: tan;
+      flex: 1 1 45%;
+      line-height: 1.2;
+    }
+
+    .explore-content {
+      flex: 1 1 45%;
+    }
+
+    .explore-description {
+      font-size: 1.2rem;
+      line-height: 1.6;
+      margin-bottom: 30px;
+    }
+
+    .explore-link {
+      color: tan;
+      font-weight: 700;
+      text-decoration: none;
+      font-size: 1.1rem;
+      display: inline-flex;
+      align-items: center;
+      transition: transform 0.3s ease;
+    }
+
+    .explore-link:hover {
+      transform: translateX(5px);
+    }
+
+    .explore-link::after {
+      content: '›';
+      margin-left: 8px;
+      font-size: 1.4rem;
+      animation: arrowMove 1.5s ease-in-out infinite;
+      opacity: 0;
+    }
+
+    @keyframes arrowMove {
+      0% { transform: translateX(0); opacity: 0; }
+      50% { transform: translateX(5px); opacity: 1; }
+      100% { transform: translateX(10px); opacity: 0; }
+    }
+    /*explore Settings*/
+
     @media (max-width: 768px) {
       .cursive{
         width: 400px;
@@ -372,6 +450,25 @@
     #animatedText{
       top: 200%;
     }
+
+    /*Explore section*/
+     .explore-container {
+        flex-direction: column;
+      }
+
+      .explore-title, .explore-content {
+        flex: 1 1 100%;
+        margin-bottom: 20px;
+      }
+
+      .explore-title {
+        font-size: 2.2rem;
+      }
+
+      .explore-description {
+        font-size: 1rem;
+      }
+    /*Explore section*/
     }
 
   </style>
@@ -582,6 +679,20 @@
     </div>
   </section>
 
+  <!--Explore Section-->
+
+   <section class="explore" id="fade-section">
+    <div class="explore-title">
+      Explore the I Wood Say<br>collection
+    </div>
+    <div class="explore-content">
+      <p class="explore-description">
+        The I Wood Say collection offers a wide range of prestigious, high-precision artpieces, from Professional to Classic models to suit any space.
+      </p>
+      <a href="#" class="explore-link">Find your I Wood Say</a>
+    </div>
+  </section>
+
   <script>
     // Logo + Navbar blur on scroll
     document.addEventListener("DOMContentLoaded", () => {
@@ -773,5 +884,29 @@
       animateChar(currentIndex);
     }
   </script>
+  <!--Scripting For explore section-->
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const section = document.getElementById('fade-section');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            section.classList.add('visible');
+          } else {
+            section.classList.remove('visible');
+          }
+        });
+      }, {
+        threshold: 0.1
+      });
+
+      observer.observe(section);
+    });
+
+    document.querySelector('.explore-link').addEventListener('click', () => {
+      console.log("User clicked 'Find your Rolex'");
+    });
+  </script>
+  <!--Scripting For explore section-->
 </body>
 </html>
