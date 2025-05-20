@@ -33,7 +33,7 @@
     }
 
     .navbar.scrolled {
-      background-color: rgba(255, 255, 255, 0.3);
+      background-color: rgba(255, 255, 255, 0.1);
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -437,80 +437,148 @@
     }
     /*explore Settings*/
 
-    /*Image Parallax Settings*/
-    .parallax-container {
-      position: relative;
-      width: 100%;
-      height: 400px;
-      padding-bottom:40%; /* 4:16 = 25% aspect ratio */
-      overflow: hidden;
+    /*Image slider Settings*/
+    .IMGslider {
+      text-align: center;
+      padding: 40px 20px;
     }
-    
-    .parallax-image {
-      position: absolute;
-      top: -50px;
-      left: 0;
-      width: 100%;
-      height: 150%; /* Make image taller than container to allow for parallax effect */
-      background-size: cover;
-      background-position: center;
-      transform: translateY(0);
-      will-change: transform;
-      transition: opacity 0.3s ease;
-      opacity: 0;
+
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 10px;
     }
-    
-    .parallax-image.loaded {
-      opacity: 1;
+
+    p {
+      font-size: 1.2em;
+      color: #666;
     }
-    
-    .text-content {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 50%;
-      height: 100%;
+
+    .slider-container {
       display: flex;
       flex-direction: column;
+      gap: 60px;
+      margin-top: 60px;
+    }
+
+    .slider {
+      position: relative;
+      width: 100%;
+      max-width: 1200px;
+      margin: auto;
+      height: 400px;
+      overflow: hidden;
+      display: flex;
       justify-content: center;
-      padding-left: 5%;
-      color: white;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-      opacity: 0;
-      transition: opacity 0.8s ease-in-out, transform 0.8s ease-out;
+      align-items: center;
+    }
+
+    .slider-track {
+      display: flex;
+      transition: transform 1s ease;
+      height: 100%;
+      position: relative;
+    }
+
+    .slide {
+      flex: 0 0 100%;
+      opacity: 0.3;
+      transition: all 1s ease;
+      transform: scale(0.8);
+    }
+
+    .slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 15px;
+    }
+
+    .slide.active {
+      opacity: 1;
+      transform: scale(1);
       z-index: 2;
-      will-change: transform, opacity;
+    }
+
+    .slider.reverse .slider-track {
+      flex-direction: row-reverse;
+    }
+    /*Image slider Settings*/
+
+    /*Share It Section Settings*/
+        .share-section {
+      padding: 60px 20px;
+      background: #fff;
+      text-align: center;
+    }
+
+    .share-section h2 {
+      font-size: 1.8em;
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    .share-section p {
+      font-size: 1rem;
+      color: #555;
+      margin-bottom: 25px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .share-icons {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      opacity: 0;
       transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
     }
-    
-    .text-content h1 {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-      transform: translateY(20px);
-      transition: transform 0.5s ease-out;
-      opacity: 0;
-    }
-    
-    .text-content p {
-      font-size: 1.2rem;
-      max-width: 400px;
-      transform: translateY(20px);
-      transition: transform 0.5s ease-out 0.1s;
-      opacity: 0;
-    }
-    
-    .text-content.visible {
+
+    .share-icons.visible {
       opacity: 1;
       transform: translateY(0);
     }
-    
-    .text-content.visible h1,
-    .text-content.visible p {
-      transform: translateY(0);
-      opacity: 1;
-      transition: transform 0.6s ease-out, opacity 0.6s ease-in;
+
+    .share-icons button {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      background: #eee;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background 0.3s, opacity 0.5s ease;
     }
-    /*Image Parallax Settings*/
+
+    .share-icons button:nth-child(3) {
+      transition-delay: 0.1s;
+    }
+
+    .share-icons button:nth-child(2) {
+      transition-delay: 0.2s;
+    }
+
+    .share-icons button:nth-child(4) {
+      transition-delay: 0.3s;
+    }
+
+    .share-icons button:nth-child(5) {
+      transition-delay: 0.4s;
+    }
+
+    .share-icons button:hover {
+      background: #ddd;
+    }
+
+    .share-icons img {
+      width: 20px;
+      height: 20px;
+    }
+    /*Share It Section Settings*/
 
     @media (max-width: 768px) {
       .cursive{
@@ -542,22 +610,7 @@
       .explore-description {
         font-size: 1rem;
       }
-    /*Explore section*/
-
-    /*Image Parallax Settings*/
-      .parallax-container{
-      height: 450px;
     }
-      
-    .text-content h1{
-            font-size: 1.5rem;
-        }
-        .text-content p{
-            font-size: 1rem;
-        }
-    /*Image Parallax Settings*/
-    }
-
   </style>
 </head>
 <body>
@@ -770,7 +823,7 @@
 
    <section class="explore" id="fade-section">
     <div class="explore-title">
-      Explore the <br> I Wood Say<br>collection
+      Explore the I Wood Say<br>collection
     </div>
     <div class="explore-content">
       <p class="explore-description">
@@ -779,6 +832,59 @@
       <a href="#" class="explore-link">Find your I Wood Say</a>
     </div>
   </section>
+  <!-- Image slider Settings-->
+  <section class="IMGslider">
+    <h1>Discover the Collection</h1>
+    <p>Explore our unique pieces through a dynamic sliding gallery</p>
+
+    <div class="slider-container">
+      <div class="slider" id="slider1">
+        <div class="slider-track"></div>
+      </div>
+
+      <div class="slider reverse" id="slider2">
+        <div class="slider-track"></div>
+      </div>
+
+      <div class="slider" id="slider3">
+        <div class="slider-track"></div>
+      </div>
+
+      <div class="slider reverse" id="slider4">
+        <div class="slider-track"></div>
+      </div>
+    </div>
+  </section>
+  <!-- Image slider Settings-->
+
+  <!--Share it section-->
+  <section class="share-section">
+    <h2>Spread the Spark</h2>
+    <p>Inspired, entertained, or enlightened? Spread the word. Sharing is the quickest way to let others experience the same spark. 💡✨</p>
+    <div class="share-icons" id="shareIcons">
+      <button onclick="shareFacebook()">
+        <img src="https://img.icons8.com/ios-filled/50/000000/facebook-new.png" alt="Facebook" />
+        Facebook
+      </button>
+      <button onclick="shareTwitter()">
+        <img src="https://img.icons8.com/ios-filled/50/000000/twitter.png" alt="Twitter" />
+        Twitter
+      </button>
+      <button onclick="shareWhatsApp()">
+        <img src="https://img.icons8.com/ios-filled/50/000000/whatsapp.png" alt="WhatsApp" />
+        WhatsApp
+      </button>
+      <button onclick="shareInstagram()">
+        <img src="https://img.icons8.com/ios-filled/50/000000/instagram-new.png" alt="Instagram" />
+        Instagram
+      </button>
+      <button onclick="copyLink()">
+        <img src="https://img.icons8.com/ios-filled/50/000000/copy-link.png" alt="Copy Link" />
+        Copy Link
+      </button>
+    </div>
+  </section>
+  <!--Share it section-->
 
   <script>
     // Logo + Navbar blur on scroll
@@ -995,165 +1101,120 @@
     });
   </script>
   <!--Scripting For explore section-->
-  <!--Scripting for Image Parallax setting-->
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      // Array of image data with headings and subheadings
-      const contentData = [
-        {
-          imageUrl: '/mainbg1.jpg',
-          heading: 'Sleek Goemetry',
-          subheading: 'A wooden fixture, casting a warm ambient glow against a neutral backdrop'
-        },
-        {
-          imageUrl: '/mainbg2.jpg',
-          heading: 'The Wooden Trio',
-          subheading: 'A serene arrangement of abstract wooden figures'
-        },
-        {
-          imageUrl: '/mainbg3.jpg',
-          heading: 'The Ember Table',
-          subheading: 'A bold charcoal-black wooden coffee table anchors the warm toned living space'
-        },
-        {
-          imageUrl: '/mainbg4.jpg',
-          heading: 'The Solace Set',
-          subheading: 'A pair of sculpted wooden side tables bring warmth and balance to a tranquil corner'
-        }
-      ];
-      
-      // Dynamically create parallax containers
-      contentData.forEach((data, index) => {
-        createParallaxContainer(data, index);
-      });
-      
-      // Function to create a parallax container
-      function createParallaxContainer(data, index) {
-        // Create container elements
-        const container = document.createElement('div');
-        container.className = 'parallax-container';
-        
-        const image = document.createElement('div');
-        image.className = 'parallax-image';
 
-        // Set a loading background color before image loads
-        image.style.backgroundColor = '#333';
-        
-        const overlay = document.createElement('div');
-        overlay.className = 'overlay';
-        
-        const textContent = document.createElement('div');
-        textContent.className = 'text-content';
-        
-        const heading = document.createElement('h1');
-        heading.textContent = data.heading;
-        
-        const subheading = document.createElement('p');
-        subheading.textContent = data.subheading;
-        
-        // Append elements
-        textContent.appendChild(heading);
-        textContent.appendChild(subheading);
-        container.appendChild(image);
-        container.appendChild(overlay);
-        container.appendChild(textContent);
-        document.body.appendChild(container);
-        
-        // Lazy load images
-        setTimeout(() => {
-          image.style.backgroundImage = `url(${data.imageUrl})`;
-          image.classList.add('loaded');
-        }, 100 * index); // Stagger the loading slightly
-      }
-      
-      // Function to check if element is in viewport
-      function isElementInViewport(el) {
-        const rect = el.getBoundingClientRect();
-        const windowHeight = window.innerHeight || document.documentElement.clientHeight;
-        
-        // Element is fully visible
-        const isFullyVisible = (rect.top >= 0 && rect.bottom <= windowHeight);
-        
-        // Element is partially visible
-        const isPartiallyVisible = (
-          rect.top < windowHeight &&
-          rect.bottom > 0
-        );
-        
-        return {
-          isFullyVisible,
-          isPartiallyVisible,
-          visibilityPercentage: calculateVisibilityPercentage(rect, windowHeight)
-        };
-      }
-      
-      // Calculate what percentage of the element is visible
-      function calculateVisibilityPercentage(rect, windowHeight) {
-        const elementHeight = rect.bottom - rect.top;
-        
-        // If element is not in viewport at all
-        if (rect.bottom < 0 || rect.top > windowHeight) {
-          return 0;
-        }
-        
-        // Calculate visible portion
-        const visibleTop = Math.max(0, rect.top);
-        const visibleBottom = Math.min(windowHeight, rect.bottom);
-        const visibleHeight = visibleBottom - visibleTop;
-        
-        return visibleHeight / elementHeight;
-      }
-      
-      // Update parallax and visibility effects
-      function updateEffects() {
-        const containers = document.querySelectorAll('.parallax-container');
-        
-        containers.forEach(container => {
-          const image = container.querySelector('.parallax-image');
-          const textContent = container.querySelector('.text-content');
-          const containerTop = container.getBoundingClientRect().top;
-          const windowHeight = window.innerHeight;
-          
-          // Get visibility information
-          const visibilityInfo = isElementInViewport(container);
-          
-          // Only apply parallax if the container is at least partially visible
-          if (visibilityInfo.isPartiallyVisible) {
-            // Calculate how far the container is from the viewport center
-            const scrollPosition = containerTop / windowHeight;
-            
-            // Apply transform to create parallax effect
-            image.style.transform = `translateY(${scrollPosition * 50}px)`;
-            
-            // Also move text with same parallax effect
-            const textBaseTransform = `translateY(${scrollPosition * 30}px)`;
-            
-            // Control text visibility
-            if (visibilityInfo.visibilityPercentage > 0.1) {
-              if (!textContent.classList.contains('visible')) {
-                textContent.classList.add('visible');
-              }
-              textContent.style.transform = `${textBaseTransform} translateY(0)`;
-            } else {
-              if (textContent.classList.contains('visible')) {
-                textContent.classList.remove('visible');
-              }
-              textContent.style.transform = `${textBaseTransform} translateY(30px)`;
-            }
-          }
+  <!--Scripting for Image slider setting-->
+   <script>
+    const images1 = [
+      '/1.png',
+      '/2.png',
+      '/3.png',
+      '/4.png',
+      '/5.jpeg',
+    ];
+
+    const images2 = [
+      '/W1.jpeg',
+      '/W2.jpeg',
+      '/W3.jpeg',
+      '/W4.jpg',
+      '/W5.jpg',
+    ];
+
+    const images3 = [
+      '/S1.png',
+      '/S2.jpg',
+      '/S3.png',
+      '/S4.png',
+      '/S5.png',
+    ];
+
+    const images4 = [
+      '/F1.jpg',
+      '/F2.jpg',
+      '/F3.jpeg',
+      '/F4.jpg',
+      '/F5.jpg',
+    ];
+
+    function initSlider(sliderId, images, reverse = false) {
+      const slider = document.getElementById(sliderId);
+      const track = slider.querySelector('.slider-track');
+      let currentIndex = 0;
+
+      images.forEach(src => {
+        const slide = document.createElement('div');
+        slide.className = 'slide';
+        slide.innerHTML = `<img src="${src}" />`;
+        track.appendChild(slide);
+      });
+
+      const slides = track.querySelectorAll('.slide');
+
+      function updateSlides() {
+        slides.forEach((slide, i) => {
+          slide.classList.remove('active');
         });
+        slides[currentIndex].classList.add('active');
+
+        const offset = -currentIndex * 100;
+        track.style.transform = `translateX(${reverse ? -offset : offset}%)`;
       }
-      
-      // Update on scroll
-      window.addEventListener('scroll', updateEffects);
-      
-      // Initial update
-      setTimeout(updateEffects, 100);
-      
-      // Update on resize
-      window.addEventListener('resize', updateEffects);
-    });
+
+      function nextSlide() {
+        currentIndex = (currentIndex + 1) % slides.length;
+        updateSlides();
+      }
+
+      updateSlides();
+      setInterval(nextSlide, 3000);
+    }
+
+    initSlider('slider1', images1, false);
+    initSlider('slider2', images2, true);
+    initSlider('slider3', images3, false);
+    initSlider('slider4', images4, true);
   </script>
-  <!--Scripting for Image Parallax setting-->
+  <!--Scripting for Image slider setting-->
+
+
+  <!--Scripting for Share It section setting-->
+  <script>
+    const pageUrl = encodeURIComponent(window.location.href);
+    const pageTitle = encodeURIComponent(document.title);
+
+    function shareFacebook() {
+      window.open(`https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`, '_blank');
+    }
+
+    function shareTwitter() {
+      window.open(`https://twitter.com/intent/tweet?url=${pageUrl}&text=${pageTitle}`, '_blank');
+    }
+
+    function shareWhatsApp() {
+      window.open(`https://wa.me/?text=${pageTitle}%20${pageUrl}`, '_blank');
+    }
+
+    function shareInstagram() {
+      alert("Instagram doesn't support direct sharing via link. Copy the link instead.");
+    }
+
+    function copyLink() {
+      navigator.clipboard.writeText(window.location.href).then(() => {
+        alert("Link copied to clipboard!");
+      });
+    }
+
+    // Intersection Observer to trigger fade-in
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          document.getElementById('shareIcons').classList.add('visible');
+        }
+      });
+    }, { threshold: 0.5 });
+
+    observer.observe(document.getElementById('shareIcons'));
+  </script>
+  <!--Scripting for Share It section setting-->
 </body>
 </html>
